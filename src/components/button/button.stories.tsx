@@ -9,6 +9,7 @@ export default {
 export const BasicButton = (args: ButtonProps) => <Button {...args} />;
 BasicButton.args = {
   disabled: false,
+  buttonType: 'filled',
   children: 'Sample'
 }
 
