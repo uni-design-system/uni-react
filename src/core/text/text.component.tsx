@@ -14,7 +14,7 @@ export interface TextProps {
   children: ReactNode;
   align?: HorizontalAlign;
   role: TextRole;
-  size?: Size;
+  scale?: Size;
   color?: ColorToken;
 }
 
