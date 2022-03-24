@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Button, ButtonProps } from './button.component';
 
 export default {
@@ -11,7 +11,7 @@ export const Filled = (args: ButtonProps) => <Button {...args} />;
 Filled.args = {
   disabled: false,
   buttonType: 'filled',
-  children: 'Filled Button'
+  text: 'Filled Button'
 }
 
 Filled.story = {
@@ -24,7 +24,7 @@ export const Elevated = (args: ButtonProps) => <Button {...args} />;
 Elevated.args = {
   disabled: false,
   buttonType: 'elevated',
-  children: 'Elevated Button'
+  text: 'Elevated Button'
 }
 
 Elevated.story = {
@@ -36,7 +36,7 @@ export const Outlined = (args: ButtonProps) => <Button {...args} />;
 Outlined.args = {
   disabled: false,
   buttonType: 'outlined',
-  children: 'Outlined Button'
+  text: 'Outlined Button'
 }
 
 Outlined.story = {

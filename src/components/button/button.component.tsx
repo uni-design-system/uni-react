@@ -1,32 +1,51 @@
 import React, { CSSProperties, ReactNode } from 'react';
 import useTheme from '../../core/theme/theme.hook';
 import { Text } from '../../core/text/text.component';
-import { Theme, ButtonType, ColorToken, Size, ShadowMap, ShadowElevation } from '@uni-design-system/uni-core';
+import {
+  Theme,
+  ButtonType,
+  ColorToken,
+  Size,
+  ShadowMap,
+  ShadowElevation,
+  IconToken, ContentColorToken
+} from '@uni-design-system/uni-core';
 import { BorderStyle } from '../../core/border/border.style';
+import { IconTextRow } from '../icon-text-row/icon-text-row.component';
 
 export interface ButtonProps {
-  children: ReactNode,
+  text?: string;
+  children?: ReactNode,
   buttonType: ButtonType;
   disabled?: boolean;
   size: Size;
   elevation?: ShadowElevation;
+  iconName?: IconToken;
 }
 
-export function Button({ children, buttonType, size, disabled = false, elevation }: ButtonProps): JSX.Element {
+export function Button({ text, children, buttonType, size, disabled = false, elevation, iconName }: ButtonProps): JSX.Element {
 
   const theme = useTheme();
   const style = Style(theme, buttonType, size, elevation);
 
-  const textColor: ColorToken = `on-${theme.buttons[buttonType].color}` as ColorToken;
+  const textColor = `on-${theme.buttons[buttonType].color}` as ContentColorToken;
 
   return (
     <button disabled={disabled} style={style}>
-      <Text align="center" role="button" color={textColor}>
-        {children}
-      </Text>
+      {
+        iconName ?
+          <IconTextRow iconName={iconName} color={textColor} textRole="button">
+            { text || children }
+          </IconTextRow>
+          :
+          <Text align="center" role="button" color={textColor}>
+            { text || children }
+          </Text>
+      }
     </button>
   )
 }
+
 
 function Style(theme: Theme, buttonType: ButtonType, size: Size, elevation: ShadowElevation | undefined): CSSProperties {
 
