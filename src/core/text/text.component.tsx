@@ -1,7 +1,7 @@
 import React, { CSSProperties, ReactNode } from 'react';
 import useTheme from '../theme/theme.hook';
 import {
-  ColorToken,
+  ColorToken, ContentColorToken,
   FontWeight,
   FontWeightMap,
   HorizontalAlign,
@@ -11,22 +11,23 @@ import {
 } from '@uni-design-system/uni-core';
 
 export interface TextProps {
-  children: ReactNode;
+  text?: string;
+  children?: ReactNode;
   align?: HorizontalAlign;
   role: TextRole;
   scale?: Size;
-  color?: ColorToken;
+  color?: ContentColorToken;
 }
 
 export function Text(props: TextProps) {
 
-  const { children, align, role, color } = props;
+  const { text, children, align, role, color } = props;
   const theme = useTheme();
   const style = Style(theme, align, role, color);
 
   return (
     <div style={style}>
-      {children}
+      { text || children }
     </div>
   )
 }
@@ -41,7 +42,7 @@ function Style(theme: Theme, textAlign: HorizontalAlign | undefined, role: TextR
     textTransform,
     lineHeight: lineHeight + 'px',
     fontFamily,
-    fontStyle,
+    fontStyle: fontStyle + 'px',
     fontWeight: FontWeightMap[fontWeight as FontWeight]
   }
 }
