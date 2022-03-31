@@ -6,16 +6,16 @@ import {
   ButtonType,
   ColorToken,
   Size,
-  ShadowMap,
   ShadowElevation,
   IconToken, ContentColorToken
 } from '@uni-design-system/uni-core';
 import { BorderStyle } from '../../core/border/border.style';
 import { IconTextRow } from '../icon-text-row/icon-text-row.component';
+import { BoxShadow } from '../../core/shadow/shadow.style';
 
 export interface ButtonProps {
   text?: string;
-  children?: ReactNode,
+  children?: ReactNode;
   buttonType: ButtonType;
   disabled?: boolean;
   size: Size;
@@ -47,13 +47,13 @@ export function Button({ text, children, buttonType, size, disabled = false, ele
 }
 
 
-function Style(theme: Theme, buttonType: ButtonType, size: Size, elevation: ShadowElevation | undefined): CSSProperties {
+function Style(theme: Theme, buttonType: ButtonType, size: Size = 'md', elevation: ShadowElevation | undefined): CSSProperties {
 
-  const { borderRadius, color, horizontalPadding, horizontalPaddings, verticalPadding, verticalPaddings,
+  const { borderRadius, color, horizontalPadding, verticalPadding,
     border, borderColor, borderWidth, shadowElevation } = theme.buttons[buttonType];
 
-  const vp = !size || !verticalPaddings ? verticalPadding : verticalPaddings[size];
-  const hp = !size || !horizontalPaddings ? horizontalPadding : horizontalPaddings[size];
+  const vp = verticalPadding[size];
+  const hp = horizontalPadding[size];
 
   const styles: CSSProperties = {
     transition: 'all 0.3s cubic-bezier(.25,.8,.25,1)',
@@ -73,14 +73,8 @@ function Style(theme: Theme, buttonType: ButtonType, size: Size, elevation: Shad
   }
 
   if (shadowElevation) {
-    const shadowDef = ShadowMap[elevation || shadowElevation];
-
-    const umbra = `0 ${shadowDef.umbra.offset}px ${shadowDef.umbra.blur}px rgba(0,0,0,0.${shadowDef.umbra.opacity})`;
-    const penumbra = `0 ${shadowDef.penumbra.offset}px ${shadowDef.penumbra.blur}px rgba(0,0,0,0.${shadowDef.penumbra.opacity})`;
-
-    styles.boxShadow = [umbra, penumbra].join(', '); // '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)';  //[umbra, penumbra, ambient].join(', ');
+    styles.boxShadow = BoxShadow(elevation || shadowElevation);
   }
-
 
   return styles;
 }
