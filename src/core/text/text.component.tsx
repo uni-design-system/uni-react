@@ -36,13 +36,13 @@ function Style(theme: Theme, textAlign: HorizontalAlign | undefined, role: TextR
   const { fontSize, letterSpacing, lineHeight, fontWeight, fontFamily, fontStyle, textTransform } = theme.typography[role]
   return {
     color: theme.colors[color as ColorToken | 'on-background'],
-    fontSize,
+    fontSize: fontSize + 'px',
     letterSpacing,
     textAlign,
     textTransform,
     lineHeight: lineHeight + 'px',
     fontFamily,
-    fontStyle: fontStyle + 'px',
+    fontStyle,
     fontWeight: FontWeightMap[fontWeight as FontWeight]
   }
 }
