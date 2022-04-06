@@ -3,9 +3,16 @@ import {BuiltInThemes} from "@uni-design-system/uni-core";
 import {addDecorator} from "@storybook/react";
 import React from "react";
 import {withThemes} from "@react-theming/storybook-addon/dist/preview";
+import {LayoutProvider} from "../src/core/layout/layout.provider";
 
 const providerFn = ({theme, children}) => {
-  return <ThemeProvider themeId={theme.id} themes={BuiltInThemes}>{children}</ThemeProvider>;
+  return (
+    <LayoutProvider>
+      <ThemeProvider themeId={theme.id} themes={BuiltInThemes}>
+        {children}
+      </ThemeProvider>
+    </LayoutProvider>
+  );
 };
 
 addDecorator(withThemes(null, [BuiltInThemes.LightTheme, BuiltInThemes.DarkTheme], { providerFn }));

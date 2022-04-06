@@ -12,21 +12,23 @@ import {
 import { BorderStyle } from '../../core/border/border.style';
 import { IconTextRow } from '../icon-text-row/icon-text-row.component';
 import { BoxShadow } from '../../core/shadow/shadow.style';
+import useLayout from '../../core/layout/layout.hook';
 
 export interface ButtonProps {
   text?: string;
   children?: ReactNode;
   buttonType: ButtonType;
   disabled?: boolean;
-  size: Size;
   elevation?: ShadowElevation;
   iconName?: IconToken;
 }
 
-export function Button({ text, children, buttonType, size, disabled = false, elevation, iconName }: ButtonProps): JSX.Element {
+export function Button({ text, children, buttonType = 'filled', disabled = false, elevation, iconName }: ButtonProps): JSX.Element {
 
   const theme = useTheme();
-  const style = Style(theme, buttonType, size, elevation);
+  const { deviceSize } = useLayout();
+
+  const style = Style(theme, buttonType, deviceSize, elevation);
 
   const textColor = `on-${theme.buttons[buttonType].color}` as ContentColorToken;
 
@@ -49,8 +51,8 @@ export function Button({ text, children, buttonType, size, disabled = false, ele
 
 function Style(theme: Theme, buttonType: ButtonType, size: Size = 'md', elevation: ShadowElevation | undefined): CSSProperties {
 
-  const { borderRadius, color, horizontalPadding, verticalPadding,
-    border, borderColor, borderWidth, shadowElevation } = theme.buttons[buttonType];
+  const { color, horizontalPadding, verticalPadding,
+    border, borderColor, borderWidth, shadowElevation, borderRadius } = theme.buttons[buttonType];
 
   const vp = verticalPadding[size];
   const hp = horizontalPadding[size];
