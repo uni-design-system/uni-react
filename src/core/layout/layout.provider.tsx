@@ -20,9 +20,6 @@ export const LayoutProvider = ({children}) => {
     return () => window.removeEventListener("resize", handleWindowResize);
   }, []);
 
-  console.log('height', height);
-  console.log('width', width);
-
   return (
     <LayoutContext.Provider value={{ height, width }}>
       { children }
