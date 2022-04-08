@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactNode } from 'react';
+import React, { CSSProperties, ReactNode, useEffect, useState } from 'react';
 import useTheme from '../../core/theme/theme.hook';
 import { Text } from '../../core/text/text.component';
 import {
@@ -6,10 +6,8 @@ import {
   ButtonType,
   ColorToken,
   Size,
-  ShadowElevation,
   IconToken, ContentColorToken
 } from '@uni-design-system/uni-core';
-import { BorderStyle } from '../../core/border/border.style';
 import { IconTextRow } from '../icon-text-row/icon-text-row.component';
 import { BoxShadow } from '../../core/shadow/shadow.style';
 import useLayout from '../../core/layout/layout.hook';
@@ -19,28 +17,96 @@ export interface ButtonProps {
   children?: ReactNode;
   buttonType: ButtonType;
   disabled?: boolean;
-  elevation?: ShadowElevation;
   iconName?: IconToken;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-export function Button({ text, children, buttonType = 'filled', disabled = false, elevation, iconName }: ButtonProps): JSX.Element {
-
-  const theme = useTheme();
+export function Button({ text, children, buttonType = 'filled', disabled = false, iconName, onClick }: ButtonProps): JSX.Element {
   const { deviceSize } = useLayout();
+  const theme = useTheme();
+  const buttonProps = theme.buttons[buttonType];
 
-  const style = Style(theme, buttonType, deviceSize, elevation);
+  const getOnColorToken = (color: ColorToken) => `on-${color}` as ContentColorToken;
+  const defaultContentColor = getOnColorToken(buttonProps.color);
 
-  const textColor = `on-${theme.buttons[buttonType].color}` as ContentColorToken;
+  const [hover, setHover] = useState<boolean>(false);
+  const [click, setClick] = useState<boolean>(false);
+  const [contentColor, setContentColor] = useState<ContentColorToken>(defaultContentColor)
+
+  const style = Style(theme, buttonType, deviceSize, hover, disabled, click);
+
+  useEffect(() => {
+
+    setContentColor(getOnColorToken(disabled ? 'inverse-on-surface': buttonProps.color));
+
+  },[disabled]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setClick(false);
+    }, 250)
+  },[click]);
+
+
+  function setKeyframes() {
+    let styleSheet = document.styleSheets[0];
+    let animationName = `ripple`;
+    let keyframes = `@keyframes ${animationName} 
+    {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }`;
+    styleSheet.insertRule(keyframes, styleSheet.cssRules.length);
+  }
+
+
+  function createRipple(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+
+    setKeyframes();
+    const button = event.currentTarget;
+
+    const oldRipple = button.getElementsByClassName("ripple")[0];
+    if (oldRipple) {
+      oldRipple.remove();
+    }
+
+    const ripple = document.createElement("span");
+    ripple.classList.add("ripple");
+
+    const diameter = Math.max(button.clientWidth, button.clientHeight);
+    const radius = diameter / 2;
+
+    ripple.style.width = ripple.style.height = `${diameter}px`;
+    ripple.style.left = `${event.clientX - button.offsetLeft - radius}px`;
+    ripple.style.top = `${event.clientY - button.offsetTop - radius}px`;
+
+    ripple.style.position = 'absolute';
+    ripple.style.borderRadius = '50%';
+    ripple.style.transform = 'scale(0)';
+    ripple.style.animation = 'ripple 600ms linear';
+    ripple.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
+
+    button.appendChild(ripple);
+  }
 
   return (
-    <button disabled={disabled} style={style}>
+    <button onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+            onClick={(event) => {
+              createRipple(event);
+              setClick(true);
+            }}
+            disabled={disabled}
+            style={style}>
       {
         iconName ?
-          <IconTextRow iconName={iconName} color={textColor} textRole="button">
+          <IconTextRow iconName={iconName} color={contentColor} textRole="button">
             { text || children }
           </IconTextRow>
           :
-          <Text align="center" role="button" color={textColor}>
+          <Text align="center" role="button" color={contentColor}>
             { text || children }
           </Text>
       }
@@ -48,34 +114,49 @@ export function Button({ text, children, buttonType = 'filled', disabled = false
   )
 }
 
+function Style(theme: Theme, buttonType: ButtonType, size: Size = 'md', hover: boolean, disabled: boolean, click: boolean): CSSProperties {
 
-function Style(theme: Theme, buttonType: ButtonType, size: Size = 'md', elevation: ShadowElevation | undefined): CSSProperties {
-
-  const { color, horizontalPadding, verticalPadding,
-    border, borderColor, borderWidth, shadowElevation, borderRadius } = theme.buttons[buttonType];
-
-  const vp = verticalPadding[size];
-  const hp = horizontalPadding[size];
+  const {
+    color,
+    horizontalPadding,
+    verticalPadding,
+    borderColor,
+    borderWidth,
+    borderRadius,
+    contentColor
+  } = theme.buttons[buttonType];
 
   const styles: CSSProperties = {
+    position: 'relative',
+    overflow: 'hidden',
     transition: 'all 0.3s cubic-bezier(.25,.8,.25,1)',
-    paddingTop: vp + 'px',
-    paddingBottom: vp + 'px',
-    paddingLeft: hp + 'px',
-    paddingRight: hp + 'px',
+    cursor: 'pointer',
+    paddingTop: verticalPadding[size] + 'px',
+    paddingBottom: verticalPadding[size] + 'px',
+    paddingLeft: horizontalPadding[size] + 'px',
+    paddingRight: horizontalPadding[size] + 'px',
     borderRadius: borderRadius + 'px',
     backgroundColor: theme.colors[color],
     borderColor: theme.colors[borderColor as ColorToken],
     borderWidth: borderWidth + 'px',
-    ...BorderStyle(border, theme)
+    borderStyle: buttonType === 'outlined' ? 'solid' : 'none',
   }
 
-  if (!border && !borderWidth) {
-    styles.border = 'none';
+  if (buttonType === 'elevated' && !disabled) {
+    styles.boxShadow = BoxShadow(hover ? 'focussed' : 'raised');
   }
 
-  if (shadowElevation) {
-    styles.boxShadow = BoxShadow(elevation || shadowElevation);
+  if (disabled && buttonType === 'elevated') {
+    styles.boxShadow = BoxShadow('pressed');
+    styles.color = theme.colors[contentColor];
+  }
+
+  if (disabled) {
+    styles.cursor = 'not-allowed';
+  }
+
+  if (click && buttonType === 'elevated' && !disabled) {
+    styles.boxShadow = BoxShadow('pressed')
   }
 
   return styles;
