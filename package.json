@@ -12,7 +12,7 @@
     "build:esm": "tsc",
     "build:cjs": "tsc --module CommonJS --outDir dist/cjs",
     "storybook": "start-storybook -p 6006 -s ./.storybook/favicon",
-    "build-storybook": "build-storybook -o docs -s ./.storybook/favicon"
+    "build-storybook": "rm -rf docs/ && build-storybook -o docs -s ./.storybook/favicon"
   },
   "repository": {
     "type": "git",
