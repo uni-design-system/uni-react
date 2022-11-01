@@ -2,7 +2,7 @@ import React from 'react';
 import ThemeContext from './theme.context';
 import { BaseTheme, Theme } from '@uni-design-system/uni-core';
 
-export default function useTheme(): Theme {
+export function useTheme(): Theme {
 
   const themeProps = React.useContext(ThemeContext);
 

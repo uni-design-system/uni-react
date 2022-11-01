@@ -1,14 +1,16 @@
 import React, { CSSProperties, ReactNode } from 'react';
-import useTheme from '../theme/theme.hook';
+
 import {
-  ColorToken, ContentColorToken,
+  ColorToken,
+  ContentColorToken,
   FontWeight,
   FontWeightMap,
   HorizontalAlign,
   Size,
   TextRole,
-  Theme
+  Theme,
 } from '@uni-design-system/uni-core';
+import { useTheme } from '../theme';
 
 export interface TextProps {
   text?: string;
@@ -20,20 +22,21 @@ export interface TextProps {
 }
 
 export function Text(props: TextProps) {
-
   const { text, children, align, role, color } = props;
   const theme = useTheme();
   const style = Style(theme, align, role, color);
 
-  return (
-    <div style={style}>
-      { text || children }
-    </div>
-  )
+  return <div style={style}>{text || children}</div>;
 }
 
-function Style(theme: Theme, textAlign: HorizontalAlign | undefined, role: TextRole, color: ColorToken | undefined): CSSProperties {
-  const { fontSize, letterSpacing, lineHeight, fontWeight, fontFamily, fontStyle, textTransform } = theme.typography[role]
+function Style(
+  theme: Theme,
+  textAlign: HorizontalAlign | undefined,
+  role: TextRole,
+  color: ColorToken | undefined,
+): CSSProperties {
+  const { fontSize, letterSpacing, lineHeight, fontWeight, fontFamily, fontStyle, textTransform } =
+    theme.typography[role];
   return {
     color: theme.colors[color as ColorToken | 'on-background'],
     fontSize: fontSize + 'px',
@@ -43,7 +46,6 @@ function Style(theme: Theme, textAlign: HorizontalAlign | undefined, role: TextR
     lineHeight: lineHeight + 'px',
     fontFamily,
     fontStyle,
-    fontWeight: FontWeightMap[fontWeight as FontWeight]
-  }
+    fontWeight: FontWeightMap[fontWeight as FontWeight],
+  };
 }
-

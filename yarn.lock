@@ -2605,10 +2605,10 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@uni-design-system/uni-core@^0.0.26":
-  "integrity" "sha512-OwdJ0tq3qCJlBOQlXQVDtOWAppW9Xs/jT6Yb0Igk2zlPQBkDzWHhSSLriGmLu+lpIioMMPXYwEuLZNqaQsapMA=="
-  "resolved" "https://registry.npmjs.org/@uni-design-system/uni-core/-/uni-core-0.0.26.tgz"
-  "version" "0.0.26"
+"@uni-design-system/uni-core@^0.0.27":
+  "integrity" "sha512-sTdyICtt7bkXLOeGVllluoCaI45mMeh28Sl+YAoEeMmq34Bb5PqeqZt1QqBjTcS6u59jVNUM5Bj13SQu3eRj7w=="
+  "resolved" "https://registry.npmjs.org/@uni-design-system/uni-core/-/uni-core-0.0.27.tgz"
+  "version" "0.0.27"
 
 "@uni-design-system/uni-react-icons@^0.0.6":
   "integrity" "sha512-Zfa41saLIKkKZMJuSGeyATTGKIEfgjsTX+lSdhTL7uiZe2y95PrVa/5JMRhOIHus4EuwZTREkiIAzQHMO+cjiw=="
