@@ -9,9 +9,10 @@ export interface CardProps {
   cardType?: CardType;
   colorToken: ContainerColorToken;
   elevation?: ShadowElevation;
+  width?: number;
 }
 
-export function Card({ children, cardType, elevation, colorToken }: CardProps) {
+export function Card({ children, cardType, elevation, colorToken, width }: CardProps) {
   const theme = useTheme();
 
   const cardProps = theme.containers.card;
@@ -21,6 +22,8 @@ export function Card({ children, cardType, elevation, colorToken }: CardProps) {
     color: theme.colors[(`on-${colorToken}` as ColorToken) || 'on-surface'],
     ...Padding('md', 'all'),
   };
+
+  if (width) style.width = width;
 
   if (cardType === 'elevated') {
     style.boxShadow = BoxShadow(elevation || 'raised');

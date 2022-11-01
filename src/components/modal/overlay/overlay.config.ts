@@ -1,6 +1,6 @@
 import { Theme, hslaToString } from '@uni-design-system/uni-core';
 import { CSSProperties } from 'react';
-import { OverlayProps } from './overlay.component';
+import { OverlayProps } from './overlay.model';
 
 export const OverlayStyle = (
   theme: Theme,
@@ -16,5 +16,8 @@ export const OverlayStyle = (
     height: '100vh',
     backgroundColor,
     backdropFilter: `blur(${blurPx}px) hue-rotate(${hueRotateDeg}deg)`,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   };
 };

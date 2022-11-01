@@ -1,5 +1,7 @@
 import React from 'react';
-import { Overlay, OverlayProps } from './overlay.component';
+import { Overlay } from './overlay.component';
+import { OverlayProps } from './overlay.model';
+import sampleimage from '../../../../.storybook/favicon/apple-touch-icon.png';
 
 export default {
   title: 'Components/Modal/Overlay',
@@ -61,7 +63,12 @@ export default {
   },
 };
 
-export const OverlayPlayground = (args: OverlayProps) => <Overlay {...args} />;
+export const OverlayPlayground = (args: OverlayProps) => (
+  <>
+    <img src={sampleimage} />
+    <Overlay {...args} />
+  </>
+);
 
 const OverlayPlaygroundProps: Partial<OverlayProps> = {
   hueDeg: 0,

@@ -1,21 +1,12 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 
 import { OverlayStyle } from './overlay.config';
 import { useTheme } from '../../../core';
-
-export interface OverlayProps {
-  children?: ReactNode;
-  blurPx: number;
-  hueRotateDeg: number;
-  hueDeg: number;
-  saturation: number;
-  lightness: number;
-  transparency: number;
-}
+import { OverlayProps } from './overlay.model';
 
 export const Overlay = (overlayProps: OverlayProps) => {
   const theme = useTheme();
   const style = OverlayStyle(theme, overlayProps);
 
-  return <div style={style} />;
+  return <div style={style}>{overlayProps.children}</div>;
 };
