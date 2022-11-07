@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react';
-import { Overlay } from './overlay';
 import { Card } from '../card';
-import { Text } from '../../core';
+import { Text, Overlay } from '../../core';
 
 type ModalSize = 'sm' | 'md' | 'lg';
 

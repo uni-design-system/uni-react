@@ -7,3 +7,4 @@ export * from './container';
 export * from './padding';
 export * from './shadow';
 export * from './text';
+export * from './overlay';

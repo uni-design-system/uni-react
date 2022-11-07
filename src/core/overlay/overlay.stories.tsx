@@ -1,7 +1,6 @@
 import React from 'react';
 import { Overlay } from './overlay.component';
 import { OverlayProps } from './overlay.model';
-import sampleimage from '../../../../.storybook/favicon/apple-touch-icon.png';
 
 export default {
   title: 'Components/Modal/Overlay',
@@ -60,15 +59,26 @@ export default {
       },
       description: 'The hue in degrees.',
     },
+    imageUrl: {
+      group: 'Image Layer',
+      keyName: 'imageUrl',
+      control: { type: 'text' },
+      table: { summary: 'string' },
+    },
+    imageFit: {
+      group: 'Image Layer',
+      keyName: 'imageFit',
+      options: ['contain', 'cover', 'fill', 'none', 'scale-down'],
+      control: { type: 'inline-radio' },
+      table: {
+        type: { summary: 'string literal' },
+        defaultValue: { summary: 'cover' },
+      },
+    },
   },
 };
 
-export const OverlayPlayground = (args: OverlayProps) => (
-  <>
-    <img src={sampleimage} />
-    <Overlay {...args} />
-  </>
-);
+export const OverlayPlayground = (args: OverlayProps) => <Overlay {...args} />;
 
 const OverlayPlaygroundProps: Partial<OverlayProps> = {
   hueDeg: 0,
@@ -77,6 +87,10 @@ const OverlayPlaygroundProps: Partial<OverlayProps> = {
   transparency: 0.5,
   blurPx: 0,
   hueRotateDeg: 0,
+  isOpen: false,
+  imageFit: 'contain',
+  imageUrl:
+    'https://www.rollingstone.com/wp-content/uploads/2018/06/rs-108784-e569415749457a65514cfe8b509d7ead8b7b4013.jpg?w=500',
 };
 
 OverlayPlayground.args = OverlayPlaygroundProps;
