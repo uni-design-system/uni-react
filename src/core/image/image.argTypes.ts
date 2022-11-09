@@ -15,7 +15,7 @@ export const imageArgTypes = {
     control: { type: 'range', min: 0, max: 1, step: 0.01 },
     table: {
       type: { summary: 'number' },
-      defaultValue: { summary: '0.5' },
+      defaultValue: { summary: '1' },
     },
     description: 'A decimal of 1 to define the color lightness percentage.',
   },

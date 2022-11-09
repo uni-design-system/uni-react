@@ -6,7 +6,7 @@ import { imageArgTypes } from './image.argTypes';
 export default {
   title: 'Core/Image',
   component: Image,
-  argType: { ...imageArgTypes },
+  argTypes: { ...imageArgTypes },
 };
 
 export const ImagePlayground = (args: ImageProps) => <Image {...args} />;
