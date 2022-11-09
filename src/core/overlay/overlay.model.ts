@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
-import { ImageFit } from '../image/image.types';
+import { ImageProps } from '../image/image.model';
 
-export interface OverlayProps {
+export interface OverlayProps extends ImageProps {
   children?: ReactNode;
   blurPx?: number;
   hueRotateDeg?: number;
@@ -11,6 +11,4 @@ export interface OverlayProps {
   transparency?: number;
   isOpen?: boolean;
   fadeDuration?: number;
-  imageUrl?: string;
-  imageFit?: ImageFit;
 }

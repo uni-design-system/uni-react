@@ -1,9 +1,10 @@
 import React from 'react';
 import { Overlay } from './overlay.component';
 import { OverlayProps } from './overlay.model';
+import { imageArgTypes } from '../image/image.argTypes';
 
 export default {
-  title: 'Components/Modal/Overlay',
+  title: 'Core/Overlay',
   component: Overlay,
   argTypes: {
     hueDeg: {
@@ -59,38 +60,22 @@ export default {
       },
       description: 'The hue in degrees.',
     },
-    imageUrl: {
-      group: 'Image Layer',
-      keyName: 'imageUrl',
-      control: { type: 'text' },
-      table: { summary: 'string' },
-    },
-    imageFit: {
-      group: 'Image Layer',
-      keyName: 'imageFit',
-      options: ['contain', 'cover', 'fill', 'none', 'scale-down'],
-      control: { type: 'inline-radio' },
-      table: {
-        type: { summary: 'string literal' },
-        defaultValue: { summary: 'cover' },
-      },
-    },
+    ...imageArgTypes,
   },
 };
 
 export const OverlayPlayground = (args: OverlayProps) => <Overlay {...args} />;
 
 const OverlayPlaygroundProps: Partial<OverlayProps> = {
-  hueDeg: 0,
-  saturation: 0,
-  lightness: 0,
-  transparency: 0.5,
-  blurPx: 0,
-  hueRotateDeg: 0,
-  isOpen: false,
-  imageFit: 'contain',
-  imageUrl:
-    'https://www.rollingstone.com/wp-content/uploads/2018/06/rs-108784-e569415749457a65514cfe8b509d7ead8b7b4013.jpg?w=500',
+  hueDeg: 180,
+  saturation: 100,
+  lightness: 50,
+  transparency: 0.25,
+  blurPx: 2,
+  hueRotateDeg: 120,
+  isOpen: true,
+  fit: 'contain',
+  url: 'https://www.rollingstone.com/wp-content/uploads/2018/06/rs-108784-e569415749457a65514cfe8b509d7ead8b7b4013.jpg?w=500',
 };
 
 OverlayPlayground.args = OverlayPlaygroundProps;
