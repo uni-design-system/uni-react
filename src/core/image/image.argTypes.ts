@@ -1,3 +1,5 @@
+import { filterArgTypes } from '../filter/filter.argTypes';
+
 export const imageArgTypes = {
   url: {
     control: { type: 'text' },
@@ -11,12 +13,6 @@ export const imageArgTypes = {
       defaultValue: { summary: 'cover' },
     },
   },
-  opacity: {
-    control: { type: 'range', min: 0, max: 1, step: 0.01 },
-    table: {
-      type: { summary: 'number' },
-      defaultValue: { summary: '1' },
-    },
-    description: 'A decimal of 1 to define the color lightness percentage.',
-  },
+
+  ...filterArgTypes,
 };
