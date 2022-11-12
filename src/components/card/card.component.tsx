@@ -1,6 +1,7 @@
 import React, { CSSProperties, ReactNode } from 'react';
 import { ColorToken, ContainerColorToken, ShadowElevation } from '@uni-design-system/uni-core';
 import { BoxShadow, Padding, useTheme } from '../../core';
+import { motion } from 'framer-motion';
 
 export type CardType = 'elevated' | 'filled' | 'outlined';
 
@@ -33,5 +34,15 @@ export function Card({ children, cardType, elevation, colorToken, width }: CardP
     style.borderRadius = cardProps.borderRadii['md'];
   }
 
-  return <div style={style}>{children}</div>;
+  return (
+    <motion.div
+      style={style}
+      initial={{ y: 36, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: 36, opacity: 0 }}
+      transition={{ duration: 0.2 }}
+    >
+      {children}
+    </motion.div>
+  );
 }
