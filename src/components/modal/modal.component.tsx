@@ -13,12 +13,13 @@ const ModalSizes: Record<ModalSize, number> = {
 export interface ModalProps {
   size: ModalSize;
   children: ReactNode;
+  isOpen: boolean;
 }
 
-export const Modal = ({ children, size = 'lg' }: ModalProps) => {
+export const Modal = ({ children, isOpen, size = 'lg' }: ModalProps) => {
   return (
     <>
-      <Overlay>
+      <Overlay isOpen={isOpen}>
         <Card colorToken="background" width={ModalSizes[size]} cardType="elevated" elevation="modal">
           <Text role="title-medium">Modal Header</Text>
           {children}
