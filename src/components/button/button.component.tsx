@@ -1,6 +1,5 @@
 import React, { CSSProperties, ReactNode, useEffect, useState } from 'react';
-import { useTheme } from '../../core';
-import { BoxShadow, Text } from '../../core';
+import { createRipple, BoxShadow, Text, useTheme } from '../../core';
 import { Theme, ButtonType, ColorToken, Size, IconToken, ContentColorToken } from '@uni-design-system/uni-core';
 import { IconTextRow } from '../icon-text-row/icon-text-row.component';
 import useLayout from '../../core/layout/layout.hook';
@@ -45,56 +44,17 @@ export function Button({
     }, 250);
   }, [click]);
 
-  function setKeyframes() {
-    let styleSheet = document.styleSheets[0];
-    let animationName = `ripple`;
-    let keyframes = `@keyframes ${animationName} 
-    {
-      to {
-        transform: scale(4);
-        opacity: 0;
-      }
-    }`;
-    styleSheet.insertRule(keyframes, styleSheet.cssRules.length);
-  }
-
-  function createRipple(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    setKeyframes();
-    const button = event.currentTarget;
-
-    const oldRipple = button.getElementsByClassName('ripple')[0];
-    if (oldRipple) {
-      oldRipple.remove();
-    }
-
-    const ripple = document.createElement('span');
-    ripple.classList.add('ripple');
-
-    const diameter = Math.max(button.clientWidth, button.clientHeight);
-    const radius = diameter / 2;
-
-    ripple.style.width = ripple.style.height = `${diameter}px`;
-    ripple.style.left = `${event.clientX - button.offsetLeft - radius}px`;
-    ripple.style.top = `${event.clientY - button.offsetTop - radius}px`;
-
-    ripple.style.position = 'absolute';
-    ripple.style.borderRadius = '50%';
-    ripple.style.transform = 'scale(0)';
-    ripple.style.animation = 'ripple 600ms linear';
-    ripple.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
-
-    button.appendChild(ripple);
-  }
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    createRipple(event);
+    setClick(true);
+    onClick && onClick(event);
+  };
 
   return (
     <button
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      onClick={(event) => {
-        createRipple(event);
-        setClick(true);
-        onClick && onClick(event);
-      }}
+      onClick={handleClick}
       disabled={disabled}
       style={style}
     >
