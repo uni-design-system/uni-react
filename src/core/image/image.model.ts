@@ -5,4 +5,6 @@ export interface ImageProps extends FilterProps {
   url?: string | undefined;
   alt?: string;
   fit?: ImageFit;
+  height?: number;
+  width?: number;
 }

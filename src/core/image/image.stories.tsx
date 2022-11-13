@@ -7,6 +7,9 @@ export default {
   title: 'Core/Image',
   component: Image,
   argTypes: { ...imageArgTypes },
+  parameters: {
+    layout: 'fullscreen',
+  },
 };
 
 export const ImagePlayground = (args: ImageProps) => <Image {...args} />;

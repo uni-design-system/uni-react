@@ -16,6 +16,11 @@ export interface ModalProps {
   isOpen: boolean;
 }
 
+export interface ModalOverlayProps {
+  children?: React.ReactNode;
+  fadeDuration?: number;
+}
+
 export const Modal = ({ children, isOpen, size = 'lg' }: ModalProps) => {
   return (
     <>

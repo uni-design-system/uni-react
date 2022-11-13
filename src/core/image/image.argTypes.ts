@@ -13,6 +13,11 @@ export const imageArgTypes = {
       defaultValue: { summary: 'cover' },
     },
   },
-
+  height: {
+    control: { type: 'number' },
+  },
+  width: {
+    control: { type: 'number' },
+  },
   ...filterArgTypes,
 };
