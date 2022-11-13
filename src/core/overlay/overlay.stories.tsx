@@ -1,7 +1,7 @@
 import React from 'react';
 import { Overlay } from './overlay.component';
 import { OverlayProps } from './overlay.model';
-import { imageArgTypes } from '../image/image.argTypes';
+import { transitionArgTypes } from '../transition';
 
 export default {
   title: 'Core/Overlay',
@@ -60,22 +60,14 @@ export default {
       },
       description: 'The hue in degrees.',
     },
-    ...imageArgTypes,
+    ...transitionArgTypes,
   },
 };
 
 export const OverlayPlayground = (args: OverlayProps) => <Overlay {...args} />;
 
 const OverlayPlaygroundProps: Partial<OverlayProps> = {
-  hueDeg: 180,
-  saturation: 100,
-  lightness: 50,
-  transparency: 0.25,
-  blurPx: 2,
-  hueRotateDeg: 120,
   isOpen: true,
-  fit: 'contain',
-  url: 'https://www.rollingstone.com/wp-content/uploads/2018/06/rs-108784-e569415749457a65514cfe8b509d7ead8b7b4013.jpg?w=500',
 };
 
 OverlayPlayground.args = OverlayPlaygroundProps;

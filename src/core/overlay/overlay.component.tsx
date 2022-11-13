@@ -3,15 +3,9 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { OverlayStyle } from './overlay.config';
 import { useTheme } from '../theme';
 import { OverlayProps } from './overlay.model';
-import { Image } from '../image/image.component';
-
-export interface ModalOverlayProps {
-  children?: React.ReactNode;
-  fadeDuration?: number;
-}
 
 export const Overlay = (props: OverlayProps): JSX.Element => {
-  const { isOpen, url, fit, opacity, fadeDuration = 0.35 } = props;
+  const { isOpen, fadeDuration = 0.35 } = props;
   const theme = useTheme();
   const overlayStyle = OverlayStyle(theme, props);
 
@@ -23,9 +17,9 @@ export const Overlay = (props: OverlayProps): JSX.Element => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: fadeDuration }}
+          style={overlayStyle}
         >
-          <Image url={url} fit={fit} opacity={opacity} />
-          <div style={{ ...overlayStyle }}>{props.children}</div>
+          {props.children}
         </motion.div>
       )}
     </AnimatePresence>

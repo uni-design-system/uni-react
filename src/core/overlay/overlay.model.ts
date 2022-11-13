@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
-import { ImageProps } from '../image/image.model';
 
-export interface OverlayProps extends ImageProps {
+export interface OverlayProps {
   children?: ReactNode;
   blurPx?: number;
   hueRotateDeg?: number;

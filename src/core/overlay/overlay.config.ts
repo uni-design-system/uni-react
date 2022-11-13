@@ -19,6 +19,5 @@ export const OverlayStyle = (
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    transition: 'all 0.5s ease-in-out',
   };
 };
