@@ -16,13 +16,13 @@ export interface TextProps {
   text?: string;
   children?: ReactNode;
   align?: HorizontalAlign;
-  role: TextRole;
+  role?: TextRole;
   scale?: Size;
   color?: ContentColorToken;
 }
 
 export function Text(props: TextProps) {
-  const { text, children, align, role, color } = props;
+  const { text, children, align, role = 'body-1-long', color } = props;
   const theme = useTheme();
   const style = Style(theme, align, role, color);
 
