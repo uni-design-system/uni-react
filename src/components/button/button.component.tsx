@@ -7,7 +7,7 @@ import useLayout from '../../core/layout/layout.hook';
 export interface ButtonProps {
   text?: string;
   children?: ReactNode;
-  buttonType: ButtonType;
+  buttonType?: ButtonType;
   disabled?: boolean;
   iconName?: IconToken;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
