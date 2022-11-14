@@ -1,7 +1,7 @@
 import React from 'react';
 import { Overlay } from './overlay.component';
 import { OverlayProps } from './overlay.model';
-import { transitionArgTypes } from '../transition';
+import { transitionArgTypes } from '../transition/transition.argTypes';
 
 export default {
   title: 'Core/Overlay',
