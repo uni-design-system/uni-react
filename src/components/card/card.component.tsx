@@ -1,5 +1,5 @@
 import React, { CSSProperties, ReactNode } from 'react';
-import { ColorToken, ContainerColorToken, ShadowElevation } from '@uni-design-system/uni-core';
+import { ColorToken, ContainerColorToken, ShadowElevation, Size } from '@uni-design-system/uni-core';
 import { BoxShadow, Padding, useTheme } from '../../core';
 import { motion } from 'framer-motion';
 
@@ -8,30 +8,40 @@ export type CardType = 'elevated' | 'filled' | 'outlined';
 export interface CardProps {
   children?: ReactNode;
   cardType?: CardType;
-  colorToken: ContainerColorToken;
+  colorToken?: ContainerColorToken;
   elevation?: ShadowElevation;
-  width?: number;
+  width?: string | number;
+  height?: string | number;
+  borderRadius?: Size | 'none';
 }
 
-export function Card({ children, cardType, elevation, colorToken, width }: CardProps) {
+export function Card({
+  children,
+  cardType,
+  elevation,
+  colorToken = 'primary-container',
+  width,
+  height,
+  borderRadius,
+}: CardProps) {
   const theme = useTheme();
 
-  const cardProps = theme.containers.card;
+  const { borderRadii } = theme.containers.card;
 
   const style: CSSProperties = {
+    height,
+    width,
     backgroundColor: theme.colors[colorToken || 'surface'],
     color: theme.colors[(`on-${colorToken}` as ColorToken) || 'on-surface'],
     ...Padding('md', 'all'),
   };
 
-  if (width) style.width = width;
-
   if (cardType === 'elevated') {
     style.boxShadow = BoxShadow(elevation || 'raised');
   }
 
-  if (cardProps.borderRadii) {
-    style.borderRadius = cardProps.borderRadii['md'];
+  if (borderRadii && borderRadius !== 'none') {
+    style.borderRadius = borderRadii[borderRadius || 'md'];
   }
 
   return (
