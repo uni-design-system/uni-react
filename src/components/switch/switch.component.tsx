@@ -29,7 +29,7 @@ export const SwitchConfigs: Record<Size, { radius: number; padding: number }> = 
   },
 };
 
-export const Switch = ({ size }: SwitchProps) => {
+export const Switch = ({ size = 'sm' }: SwitchProps) => {
   const [isOn, setIsOn] = useState(false);
 
   const successColor = `hsl(${RoleHues.success.default}, 32%, 50%)`;
