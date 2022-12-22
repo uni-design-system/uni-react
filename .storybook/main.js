@@ -7,5 +7,5 @@ module.exports = {
     '@react-theming/storybook-addon',
   ],
   framework: '@storybook/react',
-  staticDirs: ['./.storybook/favicon', '../assets'],
+  staticDirs: ['../.storybook/favicon', '../assets'],
 };
