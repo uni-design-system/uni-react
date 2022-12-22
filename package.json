@@ -11,7 +11,7 @@
     "build": "rm -rf dist/ && yarn build:esm && yarn build:cjs",
     "build:esm": "tsc",
     "build:cjs": "tsc --module CommonJS --outDir dist/cjs",
-    "storybook": "start-storybook -p 6006 -s ./.storybook/favicon",
+    "storybook": "start-storybook -p 6006",
     "build-storybook": "rm -rf docs/ && build-storybook -o docs -s ./.storybook/favicon"
   },
   "repository": {
