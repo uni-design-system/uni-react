@@ -12,7 +12,10 @@ export default {
 export const ColorPickerPlayground = (args: ColorPickerProps) => <ColorPicker {...args} />;
 
 const ColorPickerPlaygroundProps: Partial<ColorPickerProps> = {
-  imageUrl: 'static/media/.storybook/uni-storybook-logo.png',
+  imageUrl: 'promenade.webp',
+  imageHeight: 683,
+  imageWidth: 1024,
+  sampleSize: 40,
 };
 
 ColorPickerPlayground.args = ColorPickerPlaygroundProps;
