@@ -10,8 +10,8 @@ export interface CardProps {
   cardType?: CardType;
   colorToken?: ContainerColorToken;
   elevation?: ShadowElevation;
-  width?: string | number;
-  height?: string | number;
+  width?: number;
+  height?: number;
   borderRadius?: Size | 'none';
 }
 

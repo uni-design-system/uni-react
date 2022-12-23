@@ -1,38 +1,24 @@
-import { CSSProperties } from 'react';
+import { Size } from '@uni-design-system/uni-core';
 
-export const switchConfig = (): CSSProperties => {
-  return {
-    display: 'flex',
-    width: '160px',
-    height: '100px',
-    backgroundColor: 'rgba(255, 255, 255, 0.4)',
-    justifyContent: 'flex-start',
-    borderRadius: '50px',
-    padding: '10px',
-    cursor: 'pointer',
-  };
+export const SwitchConfigs: Record<Size, { radius: number; padding: number }> = {
+  xs: {
+    radius: 6,
+    padding: 2,
+  },
+  sm: {
+    radius: 8,
+    padding: 2,
+  },
+  md: {
+    radius: 10,
+    padding: 3,
+  },
+  lg: {
+    radius: 12,
+    padding: 4,
+  },
+  xl: {
+    radius: 14,
+    padding: 5,
+  },
 };
-
-/*
-.switch {
-  width: 160px;
-  height: 100px;
-  background-color: rgba(255, 255, 255, 0.4);
-  display: flex;
-  justify-content: flex-start;
-  border-radius: 50px;
-  padding: 10px;
-  cursor: pointer;
-}
-
-.switch[data-isOn="true"] {
-  justify-content: flex-end;
-}
-
-.handle {
-  width: 80px;
-  height: 80px;
-  background-color: white;
-  border-radius: 40px;
-}
-* */
