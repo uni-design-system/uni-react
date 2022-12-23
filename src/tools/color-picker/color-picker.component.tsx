@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ColorSwatch } from '../color-swatch/color-swatch.component';
+import { RGBA } from '@uni-design-system/uni-core';
 
 export interface ColorPickerProps {
   imageUrl: string;
@@ -8,18 +9,11 @@ export interface ColorPickerProps {
   sampleSize: number;
 }
 
-interface rgbColor {
-  red: number;
-  green: number;
-  blue: number;
-  alpha: number;
-}
-
 export const ColorPicker = ({ imageUrl, imageWidth, imageHeight, sampleSize = 41 }: ColorPickerProps): JSX.Element => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const [pixelColor, setPixelColor] = useState<string>('#fff');
-  const [averageColor, setAverageColor] = useState<string>('#fff');
+  const [pixelColor, setPixelColor] = useState<RGBA>({ red: 0, green: 0, blue: 0, alpha: 1 });
+  const [averageColor, setAverageColor] = useState<RGBA>({ red: 0, green: 0, blue: 0, alpha: 1 });
 
   let canvas: HTMLCanvasElement | null;
   let ctx: CanvasRenderingContext2D | null;
@@ -72,20 +66,16 @@ export const ColorPicker = ({ imageUrl, imageWidth, imageHeight, sampleSize = 41
     //call the method to get the r,g,b,a values for current pixel
     let c = getPixelColor(data, cols, offsetY, offsetX);
 
-    //build a colour string for css
-    let clr = `rgb(${c.red}, ${c.green}, ${c.blue})`; //${c.alpha / 255}
-    //document.getElementById('pixelColor').style.backgroundColor = clr;
-
     //save the string to use elsewhere
     // pixel = clr;
-    setPixelColor(clr);
+    setPixelColor(c);
 
     //now get the average of the surrounding pixel colours
     setAverageColor(getAverage(data, ev));
   };
 
-  const getAverage = (data: Uint8ClampedArray, ev: { offsetX: any; offsetY: any }): string => {
-    if (!ctx) return '#fff';
+  const getAverage = (data: Uint8ClampedArray, ev: { offsetX: any; offsetY: any }): RGBA => {
+    if (!ctx) return { red: 0, green: 0, blue: 0, alpha: 1 };
     //create a 41px by 41px average colour square
     //replace everything in the canvas with the original image
     // let canvas = ev.target;
@@ -121,20 +111,18 @@ export const ColorPicker = ({ imageUrl, imageWidth, imageHeight, sampleSize = 41
     let red = Math.round(reds / nums);
     let green = Math.round(greens / nums);
     let blue = Math.round(blues / nums);
-    //create a colour string for the average colour
-    let clr = `rgb(${red}, ${green}, ${blue})`;
 
     //now draw an overlaying square of that colour
     //make the square twice as big as the sample area
-    ctx.fillStyle = clr;
+    ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`;
     ctx.strokeStyle = 'solid 2px #FFFFFF';
     ctx.strokeRect(offsetX - inset, offsetY - inset, inset * 2, inset * 2);
     ctx.fillRect(offsetX - inset, offsetY - inset, inset * 2, inset * 2);
 
-    return clr;
+    return { red, green, blue, alpha: 1 };
   };
 
-  const getPixelColor = (data: Uint8ClampedArray, cols: number, x: number, y: number): rgbColor => {
+  const getPixelColor = (data: Uint8ClampedArray, cols: number, x: number, y: number): RGBA => {
     let pixel = cols * x + y;
     let arrayPos = pixel * 4;
 
@@ -151,8 +139,8 @@ export const ColorPicker = ({ imageUrl, imageWidth, imageHeight, sampleSize = 41
       <div style={{ marginBottom: 16 }}>
         <canvas ref={canvasRef} />
       </div>
-      <ColorSwatch swatchColor={pixelColor}>Pixel Color</ColorSwatch>
-      <ColorSwatch swatchColor={averageColor}>Average Color</ColorSwatch>
+      <ColorSwatch rgba={pixelColor}>Pixel Color</ColorSwatch>
+      <ColorSwatch rgba={averageColor}>Average Color</ColorSwatch>
     </div>
   );
 };

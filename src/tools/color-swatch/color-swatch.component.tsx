@@ -1,11 +1,11 @@
 import React, { CSSProperties, ReactNode } from 'react';
-import { ShadowElevation } from '@uni-design-system/uni-core';
+import { HSLAToString, RGB, RGBToHSL, ShadowElevation } from '@uni-design-system/uni-core';
 import { BoxShadow, Padding, Text, useTheme } from '../../core';
 
 export type CardType = 'elevated' | 'filled' | 'outlined';
 
 export interface ColorSwatchProps {
-  swatchColor: string;
+  rgba: RGB;
   children?: ReactNode;
   cardType?: CardType;
   elevation?: ShadowElevation;
@@ -13,14 +13,7 @@ export interface ColorSwatchProps {
   height?: string | number;
 }
 
-export function ColorSwatch({
-  swatchColor,
-  children,
-  cardType = 'elevated',
-  elevation,
-  width,
-  height,
-}: ColorSwatchProps) {
+export function ColorSwatch({ rgba, children, cardType = 'elevated', elevation, width, height }: ColorSwatchProps) {
   const theme = useTheme();
 
   const { borderRadii } = theme.containers.card;
@@ -40,6 +33,15 @@ export function ColorSwatch({
     cardStyle.boxShadow = BoxShadow(elevation || 'pressed');
   }
 
+  const hsla = RGBToHSL(rgba);
+
+  const HSLColor = HSLAToString({
+    hue: Math.round(hsla.hue || 0),
+    saturation: Math.round(hsla.hue || 0),
+    lightness: Math.round(hsla.lightness || 0),
+  });
+  const swatchColor = `rgb(${rgba.red}, ${rgba.green}, ${rgba.blue})`;
+
   const swatchStyle: CSSProperties = {
     backgroundColor: swatchColor,
     height: 200,
@@ -53,6 +55,7 @@ export function ColorSwatch({
       <div style={swatchStyle} />
       <Text role="headline-medium">{children}</Text>
       <Text role="title-small">{swatchColor}</Text>
+      <Text role="title-small">{HSLColor}</Text>
     </div>
   );
 }
