@@ -2924,10 +2924,10 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@uni-design-system/uni-core@^0.0.29":
-  "integrity" "sha512-SaeGkgP3XtoEkZ9ObGjQROIPSPqBk5m3wYgrtxxRQyGblOK1Pkn4zRC+PN/z8UIxA7wR5oTKNvzArJBjwF+W4g=="
-  "resolved" "https://registry.npmjs.org/@uni-design-system/uni-core/-/uni-core-0.0.29.tgz"
-  "version" "0.0.29"
+"@uni-design-system/uni-core@^0.0.32":
+  "integrity" "sha512-6n2Ay1g74xH5jUC1ZRcDu0euxPd5+sdCn6kB0OVf0M2sanugc9JZzWmRD+mVznaZ5RH8cb8Q7Yeu73cRkr8REg=="
+  "resolved" "https://registry.npmjs.org/@uni-design-system/uni-core/-/uni-core-0.0.32.tgz"
+  "version" "0.0.32"
 
 "@uni-design-system/uni-react-icons@^0.0.6":
   "integrity" "sha512-Zfa41saLIKkKZMJuSGeyATTGKIEfgjsTX+lSdhTL7uiZe2y95PrVa/5JMRhOIHus4EuwZTREkiIAzQHMO+cjiw=="
