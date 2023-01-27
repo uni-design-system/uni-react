@@ -34,7 +34,7 @@
   "packageManager": "yarn@3.0.2",
   "dependencies": {
     "@uni-design-system/uni-core": "^0.0.32",
-    "@uni-design-system/uni-react-icons": "^0.0.6",
+    "@uni-design-system/uni-react-icons": "^0.1.0",
     "framer-motion": "4.1.17"
   },
   "devDependencies": {
