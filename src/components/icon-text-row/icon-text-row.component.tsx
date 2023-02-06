@@ -1,10 +1,11 @@
 import React, { ReactNode } from 'react';
-import { ContentColorToken, getValue, HorizontalAlign, IconToken, TextRole } from '@uni-design-system/uni-core';
+import { ContentColorToken, getValue, HorizontalAlign, TextRole } from '@uni-design-system/uni-core';
 
 import { alignCenter, expand, fix, row, Text, Icon, useTheme } from '../../core';
+import { IconName } from '@uni-design-system/uni-react-icons';
 
 export interface IconTextRowProps {
-  iconName: IconToken;
+  iconName: IconName;
   color: ContentColorToken;
   align?: HorizontalAlign;
   text?: string;

@@ -1,15 +1,16 @@
 import React, { CSSProperties, ReactNode, useEffect, useState } from 'react';
 import { createRipple, BoxShadow, Text, useTheme } from '../../core';
-import { Theme, ButtonType, ColorToken, Size, IconToken, ContentColorToken } from '@uni-design-system/uni-core';
+import { Theme, ButtonType, ColorToken, Size, ContentColorToken } from '@uni-design-system/uni-core';
 import { IconTextRow } from '../icon-text-row/icon-text-row.component';
 import useLayout from '../../core/layout/layout.hook';
+import { IconName } from '@uni-design-system/uni-react-icons';
 
 export interface ButtonProps {
   text?: string;
   children?: ReactNode;
   buttonType?: ButtonType;
   disabled?: boolean;
-  iconName?: IconToken;
+  iconName?: IconName;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
