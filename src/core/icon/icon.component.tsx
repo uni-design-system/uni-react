@@ -11,12 +11,7 @@ export interface IconProps {
 }
 
 export function Icon({ name = 'heartSolid', color = 'on-surface', height = 24, width = 24 }: IconProps) {
-  const theme = useTheme();
-  const themeColor = theme.colors[color];
-
+  const { colors } = useTheme();
   const Icon = IconDictionary[name];
-
-  console.log('IconDictionary', IconDictionary);
-
-  return <Icon width={width} height={height} color={themeColor} />;
+  return <Icon width={width} height={height} color={colors[color]} />;
 }
