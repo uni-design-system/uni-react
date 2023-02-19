@@ -24,15 +24,15 @@ export function Card({
   height,
   borderRadius,
 }: CardProps) {
-  const theme = useTheme();
+  const { colors, containers } = useTheme();
 
-  const { borderRadii } = theme.containers.card;
+  const { borderRadii } = containers.card;
 
   const style: CSSProperties = {
     height,
     width,
-    backgroundColor: theme.colors[colorToken || 'surface'],
-    color: theme.colors[(`on-${colorToken}` as ColorToken) || 'on-surface'],
+    backgroundColor: colors[colorToken || 'surface'],
+    color: colors[(`on-${colorToken}` as ColorToken) || 'on-surface'],
     ...Padding('md', 'all'),
   };
 
