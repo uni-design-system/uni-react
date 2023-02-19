@@ -12,6 +12,7 @@ export interface ButtonProps {
   disabled?: boolean;
   iconName?: IconName;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  useRipple?: boolean;
 }
 
 export function Button({
@@ -21,6 +22,7 @@ export function Button({
   disabled = false,
   iconName,
   onClick,
+  useRipple = true,
 }: ButtonProps): JSX.Element {
   const { deviceSize } = useLayout();
   const theme = useTheme();
@@ -46,7 +48,7 @@ export function Button({
   }, [click]);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    createRipple(event);
+    useRipple && createRipple(event);
     setClick(true);
     onClick && onClick(event);
   };
