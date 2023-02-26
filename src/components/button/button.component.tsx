@@ -13,6 +13,7 @@ export interface ButtonProps {
   iconName?: IconName;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   useRipple?: boolean;
+  style?: CSSProperties;
 }
 
 export function Button({
@@ -23,6 +24,7 @@ export function Button({
   iconName,
   onClick,
   useRipple = true,
+  style: userStyle,
 }: ButtonProps): JSX.Element {
   const { deviceSize } = useLayout();
   const theme = useTheme();
@@ -35,7 +37,7 @@ export function Button({
   const [click, setClick] = useState<boolean>(false);
   const [contentColor, setContentColor] = useState<ContentColorToken>(defaultContentColor);
 
-  const style = Style(theme, buttonType, deviceSize, hover, disabled, click);
+  const style = Style(theme, buttonType, deviceSize, hover, disabled, click, useRipple);
 
   useEffect(() => {
     setContentColor(getOnColorToken(disabled ? 'inverse-on-surface' : buttonProps.color));
@@ -59,7 +61,7 @@ export function Button({
       onMouseLeave={() => setHover(false)}
       onClick={handleClick}
       disabled={disabled}
-      style={style}
+      style={{ ...style, ...userStyle }}
     >
       {iconName ? (
         <IconTextRow iconName={iconName} color={contentColor} textRole="button">
@@ -81,12 +83,13 @@ function Style(
   hover: boolean,
   disabled: boolean,
   click: boolean,
+  useRipple: boolean,
 ): CSSProperties {
   const { color, horizontalPadding, verticalPadding, borderColor, borderWidth, borderRadius, contentColor } =
     theme.buttons[buttonType];
 
   const styles: CSSProperties = {
-    position: 'relative',
+    position: useRipple ? 'relative' : undefined,
     overflow: 'hidden',
     transition: 'all 0.3s cubic-bezier(.25,.8,.25,1)',
     cursor: 'pointer',
