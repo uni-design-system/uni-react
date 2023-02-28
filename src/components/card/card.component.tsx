@@ -11,7 +11,7 @@ export interface CardProps {
   colorToken?: ContainerColorToken;
   elevation?: ShadowElevation;
   width?: number;
-  height?: number;
+  height?: number | string | undefined;
   borderRadius?: Size | 'none';
 }
 
