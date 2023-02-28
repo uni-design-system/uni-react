@@ -53,11 +53,11 @@ export const IconTextRow = ({
     <div style={{ ...row, ...alignCenter }}>
       <RowCenter />
       <RowIcon />
-      <RowText />
+      {children && <RowText />}
     </div>
   ) : (
     <div style={{ ...row, ...alignCenter }}>
-      <RowText />
+      {children && <RowText />}
       <RowIcon />
     </div>
   );

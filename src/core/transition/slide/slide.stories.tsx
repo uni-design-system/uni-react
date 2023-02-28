@@ -5,6 +5,7 @@ import { Button, Card } from '../../../components';
 
 export default {
   title: 'Components / Transition / Slide',
+  component: Slide,
 };
 
 export const Sidebar = ({ ...args }: SlideProps) => {
@@ -33,3 +34,5 @@ export const Sidebar = ({ ...args }: SlideProps) => {
     </>
   );
 };
+
+Sidebar.args = {};

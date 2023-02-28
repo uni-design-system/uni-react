@@ -31,6 +31,7 @@ export function Card({
   const style: CSSProperties = {
     height,
     width,
+    position: 'fixed',
     backgroundColor: colors[colorToken || 'surface'],
     color: colors[(`on-${colorToken}` as ColorToken) || 'on-surface'],
     ...Padding('md', 'all'),

@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { Card } from '../card';
-import { Text, Overlay } from '../../core';
+import { Overlay } from '../../core';
 
 type ModalSize = 'sm' | 'md' | 'lg';
 
@@ -26,7 +26,6 @@ export const Modal = ({ children, isOpen, size = 'lg' }: ModalProps) => {
     <>
       <Overlay isOpen={isOpen}>
         <Card colorToken="background" width={ModalSizes[size]} cardType="elevated" elevation="modal">
-          <Text role="title-medium">Modal Header</Text>
           {children}
         </Card>
       </Overlay>
