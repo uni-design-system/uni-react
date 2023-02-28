@@ -27,7 +27,7 @@ export const Sidebar = ({ ...args }: SlideProps) => {
           elevation="modal"
           height="100%"
         >
-          <Button buttonType="icon" iconName="minus" onClick={toggle} />
+          <Button buttonType="icon" iconName="xmarkSolid" onClick={toggle} />
         </Card>
       </Slide>
     </>
