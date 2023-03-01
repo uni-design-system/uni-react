@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://uni-design-system.github.io/uni-react/" target="_blank">
-    <img src="https://uni-design-system.github.io/uni-react/static/media/uni-storybook-logo.c29cec8f.png" alt="Heroicons" width="300">
+    <img src="./.github/uni-logo.png" alt="UNI Design System">
   </a>
 </p>
 
