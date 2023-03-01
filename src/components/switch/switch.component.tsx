@@ -1,20 +1,25 @@
-import { motion } from 'framer-motion';
+import { motion, Transition } from 'framer-motion';
 import React, { CSSProperties, useState } from 'react';
 import { RoleHues, Size } from '@uni-design-system/uni-core';
 import { SwitchConfigs } from './switch.config';
 
 export interface SwitchProps {
   size: Size;
+  on?: boolean;
+  onChange?: (on: boolean) => void;
 }
 
-export const Switch = ({ size = 'sm' }: SwitchProps) => {
-  const [isOn, setIsOn] = useState(false);
+export const Switch = ({ size = 'sm', on = false, onChange }: SwitchProps) => {
+  const [isOn, setIsOn] = useState(on);
 
   const successColor = `hsl(${RoleHues.success.default}, 32%, 50%)`;
 
-  const toggleSwitch = () => setIsOn(!isOn);
+  const toggleSwitch = () => {
+    setIsOn(!isOn);
+    onChange && onChange(!isOn);
+  };
 
-  const spring = {
+  const spring: Transition = {
     type: 'spring',
     stiffness: 700,
     damping: 30,
