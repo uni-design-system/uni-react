@@ -9,5 +9,5 @@ export const ModalCloseButton = ({ ...rest }: PropsWithChildren<ButtonProps>): J
     padding: '8px',
   };
 
-  return <Button useRipple={false} buttonType="icon" iconName="xmarkSolid" style={style} {...rest} />;
+  return <Button useRipple={false} buttonType="icon" iconName="xMark" style={style} {...rest} />;
 };
