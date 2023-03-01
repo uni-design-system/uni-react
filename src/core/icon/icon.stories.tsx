@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Icon, IconProps } from './icon.component';
 import { Button } from '../../components';
-import { IconKeys, IconName } from '@uni-design-system/uni-react-icons';
+import { IconKeys, IconName } from './index';
 
 export default {
   title: 'Typography/Icons',
@@ -11,8 +11,7 @@ export default {
 export const IconPlayground = (args: IconProps) => <Icon {...args} />;
 
 IconPlayground.args = {
-  name: 'heartSolid',
-  color: 'on-surface',
+  name: IconKeys[0],
   height: 48,
   width: 48,
 };
@@ -24,7 +23,7 @@ export const IconManifest = (): JSX.Element => {
     return IconKeys.filter((name) => name.toLowerCase().indexOf(filter.toLowerCase()) > -1);
   };
 
-  const copyToClipboard = async (iconName: IconName): Promise<void> => {
+  const copyToClipboard = async (iconName: string): Promise<void> => {
     await navigator.clipboard.writeText(iconName);
     alert(`Copied ${iconName} to clipboard.`);
   };
@@ -38,7 +37,7 @@ export const IconManifest = (): JSX.Element => {
             <Button
               buttonType="icon"
               iconName={iconName as IconName}
-              onClick={(): Promise<void> => copyToClipboard(iconName as IconName)}
+              onClick={(): Promise<void> => copyToClipboard(iconName)}
             >
               {iconName}
             </Button>

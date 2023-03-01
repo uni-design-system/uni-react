@@ -1,6 +1,6 @@
 import React from 'react';
 import { ContentColorToken } from '@uni-design-system/uni-core';
-import { IconDictionary, IconName } from '@uni-design-system/uni-react-icons';
+import { IconDictionary, IconName } from '@uni-design-system/uni-react-icons/dist/esm/heroicons/24/outline';
 import { useTheme } from '../theme';
 
 export interface IconProps {
@@ -10,7 +10,8 @@ export interface IconProps {
   width?: number;
 }
 
-export function Icon({ name = 'heartSolid', color = 'on-surface', height = 24, width = 24 }: IconProps) {
+export function Icon({ name, color = 'on-surface', height = 24, width = 24 }: IconProps) {
+  if (!name) return <></>;
   const { colors } = useTheme();
   const Icon = IconDictionary[name];
   return <Icon width={width} height={height} color={colors[color]} />;

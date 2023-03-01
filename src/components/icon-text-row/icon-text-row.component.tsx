@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import { ContentColorToken, getValue, HorizontalAlign, TextRole } from '@uni-design-system/uni-core';
 
 import { alignCenter, expand, fix, row, Text, Icon, useTheme } from '../../core';
-import { IconName } from '@uni-design-system/uni-react-icons';
+import { IconName } from '../../core/icon';
 
 export interface IconTextRowProps {
   iconName: IconName;
@@ -53,11 +53,12 @@ export const IconTextRow = ({
     <div style={{ ...row, ...alignCenter }}>
       <RowCenter />
       <RowIcon />
-      {children && <RowText />}
+      {children || (text && <RowText />)}
+      <RowCenter />
     </div>
   ) : (
     <div style={{ ...row, ...alignCenter }}>
-      {children && <RowText />}
+      {children || (text && <RowText />)}
       <RowIcon />
     </div>
   );

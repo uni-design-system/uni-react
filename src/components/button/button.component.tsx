@@ -3,7 +3,7 @@ import { createRipple, BoxShadow, Text, useTheme } from '../../core';
 import { Theme, ButtonType, ColorToken, Size, ContentColorToken } from '@uni-design-system/uni-core';
 import { IconTextRow } from '../icon-text-row/icon-text-row.component';
 import useLayout from '../../core/layout/layout.hook';
-import { IconName } from '@uni-design-system/uni-react-icons';
+import { IconName } from '../../core/icon';
 
 export interface ButtonProps {
   text?: string;

@@ -1077,7 +1077,7 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.16.3", "@babel/runtime@^7.17.8", "@babel/runtime@^7.5.0", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.17.8", "@babel/runtime@^7.5.0", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4":
   version "7.20.13"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.20.13.tgz#7055ab8a7cff2b8f6058bf6ae45ff84ad2aded4b"
   integrity sha512-gt3PKXs0DBoL9xCvOIIZ2NEqAGZqHjAnmVbfQtB620V0uReIQutpel14KcneZuer7UioY8ALKZ7iocavvzTNFA==
@@ -2933,12 +2933,10 @@
   resolved "https://registry.yarnpkg.com/@uni-design-system/uni-core/-/uni-core-0.0.32.tgz#b385d60848572672912c87fd86779c300a3f2dcf"
   integrity sha512-6n2Ay1g74xH5jUC1ZRcDu0euxPd5+sdCn6kB0OVf0M2sanugc9JZzWmRD+mVznaZ5RH8cb8Q7Yeu73cRkr8REg==
 
-"@uni-design-system/uni-react-icons@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@uni-design-system/uni-react-icons/-/uni-react-icons-0.1.0.tgz#e53cec53aafcadb54ce2f9c7d1329a8c66977f4d"
-  integrity sha512-NDkrjrscUBzjRIXRdcpEGT7f/pI7d/daUPTBCGBVfhI6Z8s31jY8nxRU28vw8CU0Ce89BPzVdzNrHSo4MBKY+A==
-  dependencies:
-    "@babel/runtime" "^7.16.3"
+"@uni-design-system/uni-react-icons@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@uni-design-system/uni-react-icons/-/uni-react-icons-0.1.1.tgz#d094f20f8c0feae83852899c3854329cbaca4fe7"
+  integrity sha512-4dHWeN/QOKyM+/qU511XZIcC0v09zeEd/KZqD8iGB4IOFptv4jykjULbcqg0cn5Wv8F49fVZhuEe95RjNHTHJw==
 
 "@usulpro/react-json-view@^2.0.1":
   version "2.0.1"
