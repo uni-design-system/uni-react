@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { CSSProperties, forwardRef } from 'react';
 import {
   AlignContent,
@@ -54,7 +54,9 @@ export interface FlexOptions {
   shrink?: FlexShrink;
 }
 
-export interface FlexProps extends FlexOptions {}
+export interface FlexProps extends FlexOptions {
+  children: ReactNode;
+}
 
 /**
  * React component used to create flexbox layouts.
