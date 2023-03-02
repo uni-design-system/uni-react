@@ -25,7 +25,7 @@ export const IconTextRow = ({
   const textProps = getValue(theme, `typography.${textRole}`, theme.typography['title-medium']);
   const textHeight = textProps.fontSize;
   const textLineHeight = textProps.lineHeight || textHeight;
-  const textMargin = textLineHeight - textHeight;
+  const textMargin = text || children ? textLineHeight - textHeight : 0;
 
   function RowIcon() {
     return (
@@ -53,12 +53,12 @@ export const IconTextRow = ({
     <div style={{ ...row, ...alignCenter }}>
       <RowCenter />
       <RowIcon />
-      {children || (text && <RowText />)}
+      <RowText />
       <RowCenter />
     </div>
   ) : (
     <div style={{ ...row, ...alignCenter }}>
-      {children || (text && <RowText />)}
+      <RowText />
       <RowIcon />
     </div>
   );
