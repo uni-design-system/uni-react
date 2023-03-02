@@ -2928,10 +2928,10 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@uni-design-system/uni-core@^0.0.32":
-  version "0.0.32"
-  resolved "https://registry.yarnpkg.com/@uni-design-system/uni-core/-/uni-core-0.0.32.tgz#b385d60848572672912c87fd86779c300a3f2dcf"
-  integrity sha512-6n2Ay1g74xH5jUC1ZRcDu0euxPd5+sdCn6kB0OVf0M2sanugc9JZzWmRD+mVznaZ5RH8cb8Q7Yeu73cRkr8REg==
+"@uni-design-system/uni-core@^0.0.33":
+  version "0.0.33"
+  resolved "https://registry.yarnpkg.com/@uni-design-system/uni-core/-/uni-core-0.0.33.tgz#fc5366b5dbaba22b222b0d31e0d0cccac046922f"
+  integrity sha512-CDP045kZgEsTg5GtMUb1Pvslpa0VyelLiLEFSGuol5S/UD/09nrmVO877n3e+W+Nv8eGhorBcNq2HM7iYokv+g==
 
 "@uni-design-system/uni-react-icons@^0.1.1":
   version "0.1.1"
