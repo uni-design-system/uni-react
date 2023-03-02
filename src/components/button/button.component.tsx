@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactNode, useEffect, useState } from 'react';
+import React, { CSSProperties, ForwardedRef, forwardRef, ReactNode, useEffect, useState } from 'react';
 import { createRipple, BoxShadow, Text, useTheme } from '../../core';
 import { Theme, ButtonType, ColorToken, Size, ContentColorToken } from '@uni-design-system/uni-core';
 import { IconTextRow } from '../icon-text-row/icon-text-row.component';
@@ -16,65 +16,75 @@ export interface ButtonProps {
   style?: CSSProperties;
 }
 
-export function Button({
-  text,
-  children,
-  buttonType = 'filled',
-  disabled = false,
-  iconName,
-  onClick,
-  useRipple = true,
-  style: userStyle,
-}: ButtonProps): JSX.Element {
-  const { deviceSize } = useLayout();
-  const theme = useTheme();
-  const buttonProps = theme.buttons[buttonType];
+export const Button = forwardRef(
+  (
+    {
+      text,
+      children,
+      buttonType = 'filled',
+      disabled = false,
+      iconName,
+      onClick,
+      useRipple = true,
+      style: userStyle,
+      ...rest
+    }: ButtonProps,
+    ref: ForwardedRef<HTMLButtonElement>,
+  ): JSX.Element => {
+    const { deviceSize } = useLayout();
+    const theme = useTheme();
+    const buttonProps = theme.buttons[buttonType];
 
-  const getOnColorToken = (color: ColorToken) => `on-${color}` as ContentColorToken;
-  const defaultContentColor = getOnColorToken(buttonProps.color);
+    const getOnColorToken = (color: ColorToken) => `on-${color}` as ContentColorToken;
+    const defaultContentColor = getOnColorToken(buttonProps.color);
 
-  const [hover, setHover] = useState<boolean>(false);
-  const [click, setClick] = useState<boolean>(false);
-  const [contentColor, setContentColor] = useState<ContentColorToken>(defaultContentColor);
+    const [hover, setHover] = useState<boolean>(false);
+    const [click, setClick] = useState<boolean>(false);
+    const [contentColor, setContentColor] = useState<ContentColorToken>(defaultContentColor);
 
-  const style = Style(theme, buttonType, deviceSize, hover, disabled, click, useRipple);
+    const style = Style(theme, buttonType, deviceSize, hover, disabled, click, useRipple);
 
-  useEffect(() => {
-    setContentColor(getOnColorToken(disabled ? 'inverse-on-surface' : buttonProps.color));
-  }, [disabled]);
+    useEffect(() => {
+      setContentColor(getOnColorToken(disabled ? 'inverse-on-surface' : buttonProps.color));
+    }, [disabled]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setClick(false);
-    }, 250);
-  }, [click]);
+    useEffect(() => {
+      setTimeout(() => {
+        setClick(false);
+      }, 250);
+    }, [click]);
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    useRipple && createRipple(event);
-    setClick(true);
-    onClick && onClick(event);
-  };
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      useRipple && createRipple(event);
+      setClick(true);
+      onClick && onClick(event);
+    };
 
-  return (
-    <button
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      onClick={handleClick}
-      disabled={disabled}
-      style={{ ...style, ...userStyle }}
-    >
-      {iconName ? (
-        <IconTextRow iconName={iconName} color={contentColor} textRole="button">
-          {text || children}
-        </IconTextRow>
-      ) : (
-        <Text align="center" role="button" color={contentColor}>
-          {text || children}
-        </Text>
-      )}
-    </button>
-  );
-}
+    return (
+      <button
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        onClick={handleClick}
+        disabled={disabled}
+        style={{ ...style, ...userStyle }}
+        ref={ref}
+        {...rest}
+      >
+        {iconName ? (
+          <IconTextRow iconName={iconName} color={contentColor} textRole="button">
+            {text || children}
+          </IconTextRow>
+        ) : (
+          <Text align="center" role="button" color={contentColor}>
+            {text || children}
+          </Text>
+        )}
+      </button>
+    );
+  },
+);
+
+Button.displayName = 'Button';
 
 function Style(
   theme: Theme,
