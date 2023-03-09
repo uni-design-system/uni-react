@@ -1,14 +1,9 @@
-import React, { ReactNode } from 'react';
+import React, { PropsWithChildren } from 'react';
 import Container from '../container/container.component';
 import { FilterStyle } from './filter.style';
-import { FilterConfig } from './filter.model';
+import { FilterProps } from './filter.model';
 
-interface FilterProps {
-  children: ReactNode;
-  filters: FilterConfig[];
-}
-
-export const Filter = (filterProps: FilterProps) => {
+export const Filter = (filterProps: PropsWithChildren<FilterProps>) => {
   const { children } = filterProps;
   const style = FilterStyle(filterProps);
 
