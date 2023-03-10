@@ -1,6 +1,6 @@
 import React from 'react';
 import { ContentColorToken } from '@uni-design-system/uni-core';
-import { IconDictionary, IconName } from '@uni-design-system/uni-react-icons/dist/esm/heroicons/24/outline';
+import { IconDictionary, IconName } from './index';
 import { useTheme } from '../theme';
 
 export interface IconProps {
