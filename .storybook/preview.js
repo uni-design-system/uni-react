@@ -1,9 +1,8 @@
-import { ThemeProvider } from '../src/core/theme/theme.provider';
+import { LayoutProvider, ThemeProvider } from '../src';
 import { BuiltInThemes } from '@uni-design-system/uni-core';
 import { addDecorator } from '@storybook/react';
 import React from 'react';
 import { withThemes } from '@react-theming/storybook-addon/dist/preview';
-import { LayoutProvider } from '../src/core/layout/layout.provider';
 
 const providerFn = ({ theme, children }) => {
   return (
