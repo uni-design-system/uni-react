@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { HTMLAttributes, ReactNode } from 'react';
 import { CSSProperties, forwardRef } from 'react';
 import {
   AlignContent,
@@ -9,7 +9,7 @@ import {
   JustifyContent,
 } from '@uni-design-system/uni-core';
 
-export interface FlexOptions {
+export interface FlexOptions extends HTMLAttributes<HTMLDivElement> {
   /**
    * Shorthand for `alignItems` style prop
    * @type AlignItems
