@@ -67,7 +67,7 @@ export interface FlexProps extends FlexOptions {
  * @see Docs
  */
 export const Flex = forwardRef<HTMLDivElement, FlexProps>((props, ref) => {
-  const { direction, align, justify, wrap, basis, grow, shrink, ...rest } = props;
+  const { direction, align, justify, wrap, basis, grow, shrink, style, ...rest } = props;
 
   const styles: CSSProperties = {
     display: 'flex',
@@ -78,6 +78,7 @@ export const Flex = forwardRef<HTMLDivElement, FlexProps>((props, ref) => {
     flexBasis: basis,
     flexGrow: grow,
     flexShrink: shrink,
+    ...style,
   };
 
   return <div ref={ref} style={styles} {...rest} />;
