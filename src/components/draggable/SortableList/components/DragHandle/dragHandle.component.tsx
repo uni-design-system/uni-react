@@ -4,7 +4,7 @@ import { Button, ButtonProps } from '../../../../button';
 import { useDndContext } from '@dnd-kit/core';
 
 export const DragHandle = ({ ...rest }: ButtonProps): JSX.Element => {
-  const { attributes, listeners, ref } = useContext(SortableItemContext);
+  const { attributes, listeners } = useContext(SortableItemContext);
   const dndContext = useDndContext();
 
   return (
@@ -14,7 +14,6 @@ export const DragHandle = ({ ...rest }: ButtonProps): JSX.Element => {
       buttonType="icon"
       {...attributes}
       {...listeners}
-      ref={ref}
       {...rest}
     />
   );
