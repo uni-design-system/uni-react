@@ -1,90 +1,86 @@
-import React, { CSSProperties, ForwardedRef, forwardRef, ReactNode, useEffect, useState } from 'react';
-import { createRipple, BoxShadow, Text, useTheme } from '../../core';
+import React, { CSSProperties, ReactNode, useEffect, useState } from 'react';
+import { BoxShadow, Text, useTheme } from '../../core';
 import { Theme, ButtonType, ColorToken, Size, ContentColorToken } from '@uni-design-system/uni-core';
-import { IconTextRow } from '../icon-text-row/icon-text-row.component';
+import { IconTextRow } from '../icon-text-row';
 import useLayout from '../../core/layout/layout.hook';
 import { IconName } from '../../core/icon';
+import useRipple from 'use-ripple-hook/ripple';
 
 export interface ButtonProps {
   text?: string;
   children?: ReactNode;
   buttonType?: ButtonType;
+  active?: boolean;
   disabled?: boolean;
   iconName?: IconName;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  useRipple?: boolean;
+  disableRipple?: boolean;
   style?: CSSProperties;
 }
 
-export const Button = forwardRef(
-  (
-    {
-      text,
-      children,
-      buttonType = 'filled',
-      disabled = false,
-      iconName,
-      onClick,
-      useRipple = true,
-      style: userStyle,
-      ...rest
-    }: ButtonProps,
-    ref: ForwardedRef<HTMLButtonElement>,
-  ): JSX.Element => {
-    const { deviceSize } = useLayout();
-    const theme = useTheme();
-    const buttonProps = theme.buttons[buttonType];
+export const Button = ({
+  text,
+  children,
+  buttonType = 'filled',
+  disabled = false,
+  iconName,
+  onClick,
+  disableRipple = false,
+  style: userStyle,
+  ...rest
+}: ButtonProps): JSX.Element => {
+  const { deviceSize } = useLayout();
+  const theme = useTheme();
+  const [ref, createRipple] = useRipple({ disabled: disableRipple || buttonType === 'elevated' });
+  const buttonProps = theme.buttons[buttonType];
 
-    const getOnColorToken = (color: ColorToken) => `on-${color}` as ContentColorToken;
-    const defaultContentColor = getOnColorToken(buttonProps.color);
+  const getOnColorToken = (color: ColorToken) => `on-${color}` as ContentColorToken;
+  const defaultContentColor = getOnColorToken(buttonProps.color);
 
-    const [hover, setHover] = useState<boolean>(false);
-    const [click, setClick] = useState<boolean>(false);
-    const [contentColor, setContentColor] = useState<ContentColorToken>(defaultContentColor);
+  const [hover, setHover] = useState<boolean>(false);
+  const [click, setClick] = useState<boolean>(false);
+  const [contentColor, setContentColor] = useState<ContentColorToken>(defaultContentColor);
 
-    const style = Style(theme, buttonType, deviceSize, hover, disabled, click, useRipple);
+  const style = Style(theme, buttonType, deviceSize, hover, disabled, click);
 
-    useEffect(() => {
-      setContentColor(getOnColorToken(disabled ? 'inverse-on-surface' : buttonProps.color));
-    }, [disabled]);
+  useEffect(() => {
+    setContentColor(getOnColorToken(disabled ? 'inverse-on-surface' : buttonProps.color));
+  }, [disabled]);
 
-    useEffect(() => {
-      setTimeout(() => {
-        setClick(false);
-      }, 250);
-    }, [click]);
+  useEffect(() => {
+    setTimeout(() => {
+      setClick(false);
+    }, 250);
+  }, [click]);
 
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      useRipple && createRipple(event);
-      setClick(true);
-      onClick && onClick(event);
-    };
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    setClick(true);
+    onClick && onClick(event);
+  };
 
-    return (
-      <button
-        onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
-        onClick={handleClick}
-        disabled={disabled}
-        style={{ ...style, ...userStyle }}
-        ref={ref}
-        {...rest}
-      >
-        {iconName ? (
-          <IconTextRow iconName={iconName} color={contentColor} textRole="button">
-            {text || children}
-          </IconTextRow>
-        ) : (
-          <Text align="center" role="button" color={contentColor}>
-            {text || children}
-          </Text>
-        )}
-      </button>
-    );
-  },
-);
-
-Button.displayName = 'Button';
+  return (
+    <button
+      onMouseDown={createRipple}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      onClick={handleClick}
+      disabled={disabled}
+      style={{ ...style, ...userStyle }}
+      ref={ref}
+      {...rest}
+    >
+      {iconName ? (
+        <IconTextRow iconName={iconName} color={contentColor} textRole="button">
+          {text || children}
+        </IconTextRow>
+      ) : (
+        <Text align="center" role="button" color={contentColor}>
+          {text || children}
+        </Text>
+      )}
+    </button>
+  );
+};
 
 function Style(
   theme: Theme,
@@ -93,13 +89,11 @@ function Style(
   hover: boolean,
   disabled: boolean,
   click: boolean,
-  useRipple: boolean,
 ): CSSProperties {
   const { color, horizontalPadding, verticalPadding, borderColor, borderWidth, borderRadius, contentColor } =
     theme.buttons[buttonType];
 
   const styles: CSSProperties = {
-    position: useRipple ? 'relative' : undefined,
     overflow: 'hidden',
     transition: 'all 0.3s cubic-bezier(.25,.8,.25,1)',
     cursor: 'pointer',
