@@ -4,7 +4,7 @@ import { Theme, ButtonType, ColorToken, Size, ContentColorToken } from '@uni-des
 import { IconTextRow } from '../icon-text-row';
 import useLayout from '../../core/layout/layout.hook';
 import { IconName } from '../../core/icon';
-import useRipple from 'use-ripple-hook/ripple';
+import useRipple from '../../core/hooks/use-ripple';
 
 export interface ButtonProps {
   text?: string;

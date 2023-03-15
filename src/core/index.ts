@@ -8,4 +8,4 @@ export * from './padding';
 export * from './shadow';
 export * from './text';
 export * from './overlay';
-export * from './ripple';
+export * from './hooks';
