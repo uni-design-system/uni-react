@@ -2968,10 +2968,10 @@
   resolved "https://registry.yarnpkg.com/@uni-design-system/uni-core/-/uni-core-0.0.33.tgz#fc5366b5dbaba22b222b0d31e0d0cccac046922f"
   integrity sha512-CDP045kZgEsTg5GtMUb1Pvslpa0VyelLiLEFSGuol5S/UD/09nrmVO877n3e+W+Nv8eGhorBcNq2HM7iYokv+g==
 
-"@uni-design-system/uni-react-icons@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@uni-design-system/uni-react-icons/-/uni-react-icons-0.1.1.tgz#d094f20f8c0feae83852899c3854329cbaca4fe7"
-  integrity sha512-4dHWeN/QOKyM+/qU511XZIcC0v09zeEd/KZqD8iGB4IOFptv4jykjULbcqg0cn5Wv8F49fVZhuEe95RjNHTHJw==
+"@uni-design-system/uni-react-icons@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@uni-design-system/uni-react-icons/-/uni-react-icons-0.1.2.tgz#bd49923014da730acca53a96c90b004c346cb136"
+  integrity sha512-zi46P7cYlfoOOZAxgwQ8x+E0BU5c4lFBlc5Y7FTKhrFPNhYKlsaS9lgfFqQMOrofdlnNS+g4s4+phzsBjAJOOw==
 
 "@usulpro/react-json-view@^2.0.1":
   version "2.0.1"
