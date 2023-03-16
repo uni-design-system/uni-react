@@ -38,7 +38,8 @@
     "@dnd-kit/sortable": "^7.0.2",
     "@uni-design-system/uni-core": "^0.0.33",
     "@uni-design-system/uni-react-icons": "^0.1.1",
-    "framer-motion": "4.1.17"
+    "framer-motion": "4.1.17",
+    "use-ripple-hook": "^1.0.22"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
