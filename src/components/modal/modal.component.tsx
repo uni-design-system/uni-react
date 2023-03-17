@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { Card } from '../card';
 import { Overlay } from '../../core';
+import { motion } from 'framer-motion';
 
 type ModalSize = 'sm' | 'md' | 'lg';
 
@@ -25,9 +26,17 @@ export const Modal = ({ children, isOpen, size = 'lg' }: ModalProps) => {
   return (
     <>
       <Overlay isOpen={isOpen}>
-        <Card colorToken="background" width={ModalSizes[size]} cardType="elevated" elevation="modal">
-          {children}
-        </Card>
+        <motion.div
+          style={{ position: 'fixed' }}
+          initial={{ y: 36, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 36, opacity: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <Card colorToken="background" width={ModalSizes[size]} cardType="elevated" elevation="modal">
+            {children}
+          </Card>
+        </motion.div>
       </Overlay>
     </>
   );
