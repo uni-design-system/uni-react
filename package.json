@@ -1,6 +1,6 @@
 {
   "name": "@uni-design-system/uni-react",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "React component library for the UNI Design System.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -36,7 +36,7 @@
     "@dnd-kit/core": "^6.0.7",
     "@dnd-kit/modifiers": "^6.0.1",
     "@dnd-kit/sortable": "^7.0.2",
-    "@uni-design-system/uni-core": "^0.0.33",
+    "@uni-design-system/uni-core": "^0.0.34",
     "@uni-design-system/uni-react-icons": "^0.1.2",
     "framer-motion": "4.1.17",
     "use-ripple-hook": "^1.0.22"
