@@ -8,6 +8,7 @@ import {
   FlexWrap,
   JustifyContent,
 } from '@uni-design-system/uni-core';
+import { Property } from 'csstype';
 
 export interface FlexOptions extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -52,6 +53,8 @@ export interface FlexOptions extends HTMLAttributes<HTMLDivElement> {
    * @type FlexShrink
    */
   shrink?: FlexShrink;
+
+  gap?: Property.Gap<number | string>;
 }
 
 export interface FlexProps extends FlexOptions {
@@ -67,7 +70,7 @@ export interface FlexProps extends FlexOptions {
  * @see Docs
  */
 export const Flex = forwardRef<HTMLDivElement, FlexProps>((props, ref) => {
-  const { direction, align, justify, wrap, basis, grow, shrink, style, ...rest } = props;
+  const { direction, align, justify, wrap, basis, grow, shrink, gap, style, ...rest } = props;
 
   const styles: CSSProperties = {
     display: 'flex',
@@ -78,6 +81,7 @@ export const Flex = forwardRef<HTMLDivElement, FlexProps>((props, ref) => {
     flexBasis: basis,
     flexGrow: grow,
     flexShrink: shrink,
+    gap,
     ...style,
   };
 
