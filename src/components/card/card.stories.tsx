@@ -17,7 +17,9 @@ export const Elevated = (args: CardProps) => {
     </Card>
   );
 };
-Elevated.args = {
-  colorToken: 'surface',
+
+const ElevatedArgs: CardProps = {
   cardType: 'elevated',
 };
+
+Elevated.args = ElevatedArgs;

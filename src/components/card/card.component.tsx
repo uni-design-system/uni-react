@@ -1,16 +1,17 @@
-import React, { CSSProperties, ReactNode } from 'react';
+import React, { CSSProperties, HTMLAttributes, ReactNode } from 'react';
 import { ColorToken, ContainerColorToken, ShadowElevation, Size } from '@uni-design-system/uni-core';
 import { BoxShadow, Padding, useTheme } from '../../core';
+import { Property } from 'csstype';
 
 export type CardType = 'elevated' | 'filled' | 'outlined';
 
-export interface CardProps {
+export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
   cardType?: CardType;
   colorToken?: ContainerColorToken;
   elevation?: ShadowElevation;
-  width?: number;
-  height?: number | string | undefined;
+  width?: Property.Width<number | string>;
+  height?: Property.Height<number | string>;
   borderRadius?: Size | 'none';
 }
 
@@ -18,30 +19,37 @@ export function Card({
   children,
   cardType,
   elevation,
-  colorToken = 'primary-container',
+  colorToken = 'surface',
   width,
   height,
   borderRadius,
+  style,
+  ...rest
 }: CardProps) {
   const { colors, containers } = useTheme();
 
   const { borderRadii } = containers.card;
 
-  const style: CSSProperties = {
+  const styles: CSSProperties = {
     height,
     width,
     backgroundColor: colors[colorToken || 'surface'],
     color: colors[(`on-${colorToken}` as ColorToken) || 'on-surface'],
     ...Padding('md', 'all'),
+    ...style,
   };
 
   if (cardType === 'elevated') {
-    style.boxShadow = BoxShadow(elevation || 'raised');
+    styles.boxShadow = BoxShadow(elevation || 'raised');
   }
 
   if (borderRadii && borderRadius !== 'none') {
-    style.borderRadius = borderRadii[borderRadius || 'md'];
+    styles.borderRadius = borderRadii[borderRadius || 'md'];
   }
 
-  return <div style={style}>{children}</div>;
+  return (
+    <div style={styles} {...rest}>
+      {children}
+    </div>
+  );
 }
