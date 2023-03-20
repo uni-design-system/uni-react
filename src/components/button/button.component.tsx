@@ -12,6 +12,7 @@ export interface ButtonProps {
   active?: boolean;
   disabled?: boolean;
   iconName?: IconName;
+  contentColor?: ContentColorToken;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   disableRipple?: boolean;
   style?: CSSProperties;
@@ -23,6 +24,7 @@ export const Button = ({
   buttonType = 'filled',
   disabled = false,
   iconName,
+  contentColor: overrideContentColor,
   onClick,
   disableRipple = false,
   style: userStyle,
@@ -34,7 +36,7 @@ export const Button = ({
   const buttonProps = theme.buttons[buttonType];
 
   const getOnColorToken = (color: ColorToken) => `on-${color}` as ContentColorToken;
-  const defaultContentColor = getOnColorToken(buttonProps.color);
+  const defaultContentColor = overrideContentColor || getOnColorToken(buttonProps.color);
 
   const [hover, setHover] = useState<boolean>(false);
   const [click, setClick] = useState<boolean>(false);
