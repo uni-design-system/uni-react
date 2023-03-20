@@ -36,17 +36,12 @@ export const Button = ({
   const buttonProps = theme.buttons[buttonType];
 
   const getOnColorToken = (color: ColorToken) => `on-${color}` as ContentColorToken;
-  const defaultContentColor = overrideContentColor || getOnColorToken(buttonProps.color);
+  const contentColor = overrideContentColor || getOnColorToken(buttonProps.color);
 
   const [hover, setHover] = useState<boolean>(false);
   const [click, setClick] = useState<boolean>(false);
-  const [contentColor, setContentColor] = useState<ContentColorToken>(defaultContentColor);
 
   const style = Style(theme, buttonType, deviceSize, hover, disabled, click);
-
-  useEffect(() => {
-    setContentColor(getOnColorToken(disabled ? 'inverse-on-surface' : buttonProps.color));
-  }, [disabled]);
 
   useEffect(() => {
     setTimeout(() => {
