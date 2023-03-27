@@ -1,18 +1,24 @@
-import React from 'react';
+import { useContext, useDebugValue, useState } from 'react';
 import ThemeContext from './theme.context';
-import { BaseTheme, Theme } from '@uni-design-system/uni-core';
+import { BaseTheme, Theme, ThemeProps } from '@uni-design-system/uni-core';
 
-export function useTheme(): Theme {
+const findTheme = (props: ThemeProps): Theme => {
+  const { themeId, themes } = props;
+  return themes && themeId ? themes[themeId] : BaseTheme;
+};
 
-  const themeProps = React.useContext(ThemeContext);
+export function useTheme() {
+  const context = useContext(ThemeContext);
+  const [theme, setTheme] = useState(findTheme(context));
 
-  const theme = themeProps && themeProps.themes && themeProps.themeId && themeProps.themes[themeProps.themeId];
+  const switchTheme = (themeId: string) => {
+    setTheme(context.themes ? context.themes[themeId] : BaseTheme);
+  };
 
   if (process.env.NODE_ENV !== 'production') {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    React.useDebugValue(theme);
+    useDebugValue(theme);
   }
 
-  // return theme || LightTheme;
-  return theme || BaseTheme;
+  return { ...theme, switchTheme };
 }
