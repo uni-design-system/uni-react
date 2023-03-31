@@ -1,24 +1,33 @@
-import { useContext, useDebugValue, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import ThemeContext from './theme.context';
-import { BaseTheme, Theme, ThemeProps } from '@uni-design-system/uni-core';
+import { BaseTheme, DefaultThemeId, Theme, ThemeProps } from '@uni-design-system/uni-core';
 
 const findTheme = (props: ThemeProps): Theme => {
   const { themeId, themes } = props;
   return themes && themeId ? themes[themeId] : BaseTheme;
 };
 
-export function useTheme() {
-  const context = useContext(ThemeContext);
-  const [theme, setTheme] = useState(findTheme(context));
+export const useTheme = (): Theme => {
+  const themeProps = useContext(ThemeContext);
 
-  const switchTheme = (themeId: string) => {
-    setTheme(context.themes ? context.themes[themeId] : BaseTheme);
-  };
+  const theme = findTheme(themeProps);
 
   if (process.env.NODE_ENV !== 'production') {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useDebugValue(theme);
+    React.useDebugValue(theme);
   }
 
-  return { ...theme, switchTheme };
-}
+  // return theme || LightTheme;
+  return theme;
+};
+
+export const useSwitchTheme = (defaultThemeId?: string): [string, (themeId?: string) => void] => {
+  const [themeId, setThemeId] = useState<string>(defaultThemeId || DefaultThemeId);
+
+  const switchTheme = (themeId?: string) => {
+    if (!themeId) return;
+    setThemeId(themeId);
+  };
+
+  return [themeId, switchTheme];
+};
