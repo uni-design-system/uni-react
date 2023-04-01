@@ -38,7 +38,7 @@ function Style(
   const { fontSize, letterSpacing, lineHeight, fontWeight, fontFamily, fontStyle, textTransform } =
     theme.typography[role];
   return {
-    color: theme.colors[color as ColorToken | 'on-background'],
+    color: theme.colors[(color as ColorToken) || 'on-background'],
     fontSize: fontSize + 'px',
     letterSpacing,
     textAlign,
