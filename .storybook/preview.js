@@ -7,9 +7,7 @@ import { withThemes } from '@react-theming/storybook-addon/dist/preview';
 const providerFn = ({ theme, children }) => {
   return (
     <LayoutProvider>
-      <ThemeProvider themeId={theme.id} themes={BuiltInThemes}>
-        {children}
-      </ThemeProvider>
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </LayoutProvider>
   );
 };

@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Theme } from '@uni-design-system/uni-core';
 import ThemeContext from './theme.context';
-import { useSwitchTheme } from './theme.hook';
 
 const STORAGE_KEY = 'THEME_ID';
 
@@ -12,7 +11,7 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider = ({ children, themeId, themes }: ThemeProviderProps) => {
-  const [_themeId, setThemeId] = useSwitchTheme(themeId);
+  const [_themeId, setThemeId] = useState<string | undefined>(themeId);
 
   useEffect(() => {
     (async () => {
@@ -22,7 +21,9 @@ export const ThemeProvider = ({ children, themeId, themes }: ThemeProviderProps)
   }, [themeId]);
 
   return (
-    <ThemeContext.Provider value={{ themeId: _themeId, themes }}>{_themeId ? children : null}</ThemeContext.Provider>
+    <ThemeContext.Provider value={{ themeId: _themeId, themes, switchTheme: setThemeId }}>
+      {_themeId ? children : null}
+    </ThemeContext.Provider>
   );
 };
 

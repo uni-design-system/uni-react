@@ -1,7 +1,17 @@
 import React from 'react';
-import { ThemeProps } from '@uni-design-system/uni-core';
+import { LightTheme, Theme } from '@uni-design-system/uni-core';
 
-const ThemeContext = React.createContext<ThemeProps>({});
+export interface ThemeContextProps {
+  themeId?: string;
+  themes?: Record<string, Theme>;
+  switchTheme: (themeId: string) => void;
+}
+
+const ThemeContext = React.createContext<ThemeContextProps>({
+  themeId: 'LightTheme',
+  themes: { LightTheme },
+  switchTheme: () => {},
+});
 
 if (process.env.NODE_ENV !== 'production') {
   ThemeContext.displayName = 'ThemeContext';
