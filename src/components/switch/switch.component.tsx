@@ -4,7 +4,7 @@ import { RoleHues, Size } from '@uni-design-system/uni-core';
 import { SwitchConfigs } from './switch.config';
 
 export interface SwitchProps {
-  size: Size;
+  size?: Size;
   on?: boolean;
   onChange?: (on: boolean) => void;
 }
