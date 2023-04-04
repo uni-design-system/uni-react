@@ -1,6 +1,6 @@
 {
   "name": "@uni-design-system/uni-react",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "React component library for the UNI Design System.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
