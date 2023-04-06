@@ -1,24 +1,47 @@
 import React, { CSSProperties, ReactNode } from 'react';
-import { useTheme } from '../theme';
-import { Theme } from '@uni-design-system/uni-core';
 import { Property } from 'csstype';
 
-interface BackgroundProps {
+export interface BackgroundProps {
+  className?: string;
   children?: ReactNode;
-  image?: Property.BackgroundImage | undefined;
-  gradiant?: Property.BackgroundImage | undefined;
+  image?: Property.BackgroundImage;
+  imageUrl?: string;
+  gradiant?: Property.BackgroundImage;
+  position?: Property.BackgroundPosition; // https://developer.mozilla.org/en-US/docs/Web/CSS/background-position
+  size?: Property.BackgroundSize; // https://developer.mozilla.org/en-US/docs/Web/CSS/background-size
+  attachment?: 'fixed' | 'local' | 'scroll';
+  minHeight?: Property.MinHeight;
+  color?: string;
 }
 
-export const Background = ({ children, image, gradiant }: BackgroundProps): JSX.Element => {
-  const theme = useTheme();
-  const style = BackgroundStyle({ theme, image, gradiant });
+export const Background = ({
+  children,
+  image,
+  imageUrl,
+  gradiant,
+  position,
+  size,
+  attachment,
+  className,
+  minHeight,
+  color,
+}: BackgroundProps): JSX.Element => {
+  if (!!imageUrl) {
+    image = `url(${imageUrl})`;
+  }
 
-  return <div style={style}>{children}</div>;
-};
-
-function BackgroundStyle({ image, gradiant, theme }: BackgroundProps & { theme: Theme }): CSSProperties {
-  return {
-    backgroundColor: theme.colors.background,
+  const style: CSSProperties = {
+    backgroundColor: color,
     backgroundImage: image || gradiant,
+    backgroundPosition: position,
+    backgroundSize: size,
+    minHeight,
+    backgroundAttachment: attachment,
   };
-}
+
+  return (
+    <div className={className} style={style}>
+      {children}
+    </div>
+  );
+};
