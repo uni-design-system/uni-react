@@ -4,7 +4,7 @@ import { ContainerColorToken } from '@uni-design-system/uni-core';
 export interface ContainerProps {
   children: ReactNode;
   style: CSSProperties;
-  colorToken: ContainerColorToken;
+  colorToken?: ContainerColorToken;
 }
 
 export const ContainerContext = createContext<{ colorToken?: ContainerColorToken }>({});
