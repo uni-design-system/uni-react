@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactNode } from 'react';
+import React, { ReactNode, useContext } from 'react';
 
 import {
   ColorToken,
@@ -8,9 +8,9 @@ import {
   HorizontalAlign,
   Size,
   TextRole,
-  Theme,
 } from '@uni-design-system/uni-core';
 import { useTheme } from '../theme';
+import { ContainerContext } from '../container';
 
 export interface TextProps {
   text?: string;
@@ -18,34 +18,30 @@ export interface TextProps {
   align?: HorizontalAlign;
   role?: TextRole;
   scale?: Size;
-  color?: ContentColorToken;
+  colorToken?: ContentColorToken;
 }
 
 export function Text(props: TextProps) {
-  const { text, children, align, role = 'body-1-long', color } = props;
-  const theme = useTheme();
-  const style = Style(theme, align, role, color);
+  const { text, children, align, role = 'body-1-long', colorToken: overridingColorToken } = props;
+  const { colors, typography } = useTheme();
 
-  return <div style={style}>{text || children}</div>;
-}
+  const { colorToken: containerColorToken } = useContext(ContainerContext);
 
-function Style(
-  theme: Theme,
-  textAlign: HorizontalAlign | undefined,
-  role: TextRole,
-  color: ColorToken | undefined,
-): CSSProperties {
-  const { fontSize, letterSpacing, lineHeight, fontWeight, fontFamily, fontStyle, textTransform } =
-    theme.typography[role];
-  return {
-    color: theme.colors[(color as ColorToken) || 'on-background'],
+  const colorToken = containerColorToken ? (`on-${containerColorToken}` as ColorToken) : undefined;
+
+  const { fontSize, letterSpacing, lineHeight, fontWeight, fontFamily, fontStyle, textTransform } = typography[role];
+
+  const style = {
+    color: colors[overridingColorToken || colorToken || 'on-surface'],
     fontSize: fontSize + 'px',
     letterSpacing,
-    textAlign,
+    textAlign: align,
     textTransform,
     lineHeight: lineHeight + 'px',
     fontFamily,
     fontStyle,
     fontWeight: FontWeightMap[fontWeight as FontWeight],
   };
+
+  return <div style={style}>{text || children}</div>;
 }
