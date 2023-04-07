@@ -4,6 +4,9 @@ import { GrainyGradientBackground, GrainyGradientProps } from './grainy-gradient
 export default {
   title: 'Components/Background',
   component: GrainyGradientBackground,
+  parameters: {
+    layout: 'fullscreen',
+  },
   argTypes: {
     noiseFrequency: {
       control: { type: 'range', min: 0, max: 5, step: 0.01 },

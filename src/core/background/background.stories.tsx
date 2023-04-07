@@ -4,16 +4,19 @@ import { Background, BackgroundProps } from './background.component';
 export default {
   title: 'Components/Background',
   component: Background,
+  parameters: {
+    layout: 'fullscreen',
+  },
 };
 
 export const ImageBackground = (args: BackgroundProps) => {
   return <Background {...args} />;
 };
 
-const BackgroundPlaygroundArgs: BackgroundProps = {
-  image: `url(${'promenade.webp'})`,
+const ImageBackgroundArgs: BackgroundProps = {
+  imageUrl: 'promenade.webp',
   size: 'cover',
   minHeight: '100vh',
 };
 
-ImageBackground.args = BackgroundPlaygroundArgs;
+ImageBackground.args = ImageBackgroundArgs;
