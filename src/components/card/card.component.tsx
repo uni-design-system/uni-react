@@ -2,6 +2,7 @@ import React, { CSSProperties, HTMLAttributes, ReactNode } from 'react';
 import { ColorToken, ContainerColorToken, ShadowElevation, Size } from '@uni-design-system/uni-core';
 import { BoxShadow, Padding, useTheme } from '../../core';
 import { Property } from 'csstype';
+import Container from '../../core/container/container.component';
 
 export type CardType = 'elevated' | 'filled' | 'outlined';
 
@@ -48,8 +49,8 @@ export function Card({
   }
 
   return (
-    <div style={styles} {...rest}>
+    <Container colorToken={colorToken} style={styles} {...rest}>
       {children}
-    </div>
+    </Container>
   );
 }
