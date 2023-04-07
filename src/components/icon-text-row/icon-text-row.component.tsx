@@ -38,7 +38,7 @@ export const IconTextRow = ({
   function RowText() {
     return (
       <div style={{ ...expand, paddingLeft: textMargin, paddingRight: textMargin }}>
-        <Text align={align} color={color} role={textRole}>
+        <Text align={align} colorToken={color} role={textRole}>
           {text || children}
         </Text>
       </div>

@@ -70,7 +70,7 @@ export const Button = ({
           {text || children}
         </IconTextRow>
       ) : (
-        <Text align="center" role="button" color={contentColor}>
+        <Text align="center" role="button" colorToken={contentColor}>
           {text || children}
         </Text>
       )}
