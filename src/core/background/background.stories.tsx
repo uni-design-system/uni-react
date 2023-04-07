@@ -6,7 +6,7 @@ export default {
   component: Background,
 };
 
-export const BackgroundPlayground = (args: BackgroundProps) => {
+export const ImageBackground = (args: BackgroundProps) => {
   return <Background {...args} />;
 };
 
@@ -16,4 +16,4 @@ const BackgroundPlaygroundArgs: BackgroundProps = {
   minHeight: '100vh',
 };
 
-BackgroundPlayground.args = BackgroundPlaygroundArgs;
+ImageBackground.args = BackgroundPlaygroundArgs;
